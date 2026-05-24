@@ -28,9 +28,9 @@ export default function DailyChecksheetApp() {
 
   const [completedActivities, setCompletedActivities] = useState([]);
 
-  const [appTitle, setAppTitle] = useState('Amanah Daily ✨');
+  const [appTitle, setAppTitle] = useState('Amanah Daily  ✨');
 
-  const [newTitle, setNewTitle] = useState('Amanah Daily ✨');
+  const [newTitle, setNewTitle] = useState('Amanah Daily  ✨');
   const [weeklyStats, setWeeklyStats] = useState({
   ibadahDone: 0,
   kesehatanDone: 0,
