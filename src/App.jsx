@@ -41,6 +41,8 @@ export default function DailyChecksheetApp() {
   kesehatanDone: 0,
   });
 
+  const [historyData, setHistoryData] = useState([]);
+
   const [ibadahActivities, setIbadahActivities] = useState([
     'Tahajud',
     'Subuh',
@@ -60,6 +62,7 @@ export default function DailyChecksheetApp() {
   loadActivities();
   loadCompletedActivities();
   loadWeeklyMonthlyStats();
+  loadHistoryData();
 }, []);
 
   const currentActivities =
@@ -123,7 +126,29 @@ const totalPercent =
       );
 
 const streakDays = weeklyStats.ibadahDone +
-  weeklyStats.kesehatanDone;     
+  weeklyStats.kesehatanDone;  
+  
+const activityCounts = {};
+
+historyData.forEach((item) => {
+  if (!activityCounts[item.name]) {
+    activityCounts[item.name] = 0;
+  }
+
+  activityCounts[item.name]++;
+});
+
+const sortedActivities = Object.entries(
+  activityCounts
+).sort((a, b) => b[1] - a[1]);
+
+const mostConsistent =
+  sortedActivities[0];
+
+const leastConsistent =
+  sortedActivities[
+    sortedActivities.length - 1
+  ];  
 
   const saveTitle = async () => {
     await setDoc(doc(db, "settings", "app"), {
@@ -292,6 +317,19 @@ const streakDays = weeklyStats.ibadahDone +
   loadCompletedActivities();
 };
 
+  const loadHistoryData = async () => {
+  const snapshot = await getDocs(
+    collection(db, "completed")
+  );
+
+  const history = [];
+
+  snapshot.forEach((doc) => {
+    history.push(doc.data());
+  });
+
+  setHistoryData(history);
+};
   const loadWeeklyMonthlyStats = async () => {
   const completedRef = collection(
     db,
@@ -759,6 +797,38 @@ const streakDays = weeklyStats.ibadahDone +
                   <h2 className="text-3xl font-black text-gray-800">
                     Statistik Bulanan
                   </h2>
+
+                  <div className="bg-white rounded-2xl p-4 shadow mt-4">
+  <h2 className="font-bold text-lg mb-3">
+    Evaluasi Diri 📈
+  </h2>
+
+  <div className="space-y-3">
+    <div className="bg-green-50 p-3 rounded-xl">
+      <p className="font-semibold text-green-700">
+        Aktivitas Paling Konsisten
+      </p>
+
+      <p className="text-sm mt-1">
+        {mostConsistent
+          ? `${mostConsistent[0]} (${mostConsistent[1]}x)`
+          : '-'}
+      </p>
+    </div>
+
+    <div className="bg-red-50 p-3 rounded-xl">
+      <p className="font-semibold text-red-700">
+        Aktivitas Paling Jarang
+      </p>
+
+      <p className="text-sm mt-1">
+        {leastConsistent
+          ? `${leastConsistent[0]} (${leastConsistent[1]}x)`
+          : '-'}
+      </p>
+    </div>
+  </div>
+</div>
 
                   <p className="text-sm text-gray-500 mt-1">
                     Ringkasan habit selama 30 hari
