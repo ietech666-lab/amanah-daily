@@ -128,9 +128,26 @@ const totalPercent =
 const streakDays = weeklyStats.ibadahDone +
   weeklyStats.kesehatanDone;  
   
+const currentMonth =
+  new Date().getMonth();
+
+const currentYear =
+  new Date().getFullYear();
+
+const monthlyHistory = historyData.filter(
+  (item) => {
+    const itemDate = new Date(item.date);
+
+    return (
+      itemDate.getMonth() === currentMonth &&
+      itemDate.getFullYear() === currentYear
+    );
+  }
+);
+
 const activityCounts = {};
 
-historyData.forEach((item) => {
+monthlyHistory.forEach((item) => {
   if (!activityCounts[item.name]) {
     activityCounts[item.name] = 0;
   }
