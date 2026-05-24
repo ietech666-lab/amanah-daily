@@ -512,43 +512,6 @@ const leastConsistent =
                 <div className="text-5xl">🕌</div>
               </div>
             </button>
-
-            <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100 mt-1">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-3xl font-black text-gray-800">
-                    Statistik Mingguan
-                  </h2>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Pantau konsistensi aktivitas harian kamu
-                  </p>
-                </div>
-
-                <div className="text-4xl">📈</div>
-              </div>
-
-              <div className="space-y-5">
-                {[
-                  { title: 'Ibadah', value: '92%' },
-                  { title: 'Kesehatan', value: '68%' },
-                ].map((item, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between mb-2 text-sm font-medium">
-                      <span className="text-gray-700">{item.title}</span>
-                      <span className="text-green-700">{item.value}</span>
-                    </div>
-
-                    <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-                      <div
-                        className="bg-gradient-to-r from-green-500 to-emerald-400 h-3 rounded-full"
-                        style={{ width: item.value }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         )}
 
