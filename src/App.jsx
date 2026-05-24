@@ -551,6 +551,20 @@ const leastConsistent =
           </div>
         )}
 
+            <div className="bg-white rounded-2xl p-4 shadow mt-4">
+              <h2 className="font-bold text-lg mb-3">
+                AI Evaluasi Otomatis 🤖
+              </h2>
+
+              <div className="bg-slate-50 p-4 rounded-xl">
+                <p className="text-sm leading-relaxed">
+                  {leastConsistent
+                    ? `Kamu cukup konsisten dalam beberapa aktivitas, namun "${leastConsistent[0]}" masih jarang dilakukan. Cobalah lebih fokus dan konsisten agar perkembangan diri menjadi lebih baik setiap harinya.`
+                    : 'Belum ada data evaluasi.'}
+                </p>
+              </div>
+            </div>
+            
         {activeTab === 'activity' && (
           <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100 space-y-4">
             <div className="flex items-center justify-between">
