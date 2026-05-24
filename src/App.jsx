@@ -128,26 +128,9 @@ const totalPercent =
 const streakDays = weeklyStats.ibadahDone +
   weeklyStats.kesehatanDone;  
   
-const currentMonth =
-  new Date().getMonth();
-
-const currentYear =
-  new Date().getFullYear();
-
-const monthlyHistory = historyData.filter(
-  (item) => {
-    const itemDate = new Date(item.date);
-
-    return (
-      itemDate.getMonth() === currentMonth &&
-      itemDate.getFullYear() === currentYear
-    );
-  }
-);
-
 const activityCounts = {};
 
-monthlyHistory.forEach((item) => {
+historyData.forEach((item) => {
   if (!activityCounts[item.name]) {
     activityCounts[item.name] = 0;
   }
@@ -512,6 +495,59 @@ const leastConsistent =
                 <div className="text-5xl">🕌</div>
               </div>
             </button>
+
+            <div className="bg-white rounded-2xl p-4 shadow mt-4">
+              <h2 className="font-bold text-lg mb-4">
+                 Statistik Bulanan 📊
+              </h2>
+
+              <div className="space-y-3">
+                <div className="bg-green-50 p-3 rounded-xl">
+                  <p>Total Aktivitas</p>
+
+                  <p className="font-bold text-lg">
+                    {ibadahTotal * 30 +
+                      kesehatanTotal * 30}
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 p-3 rounded-xl">
+                  <p>Dilakukan</p>
+
+                  <p className="font-bold text-lg">
+                    {monthlyStats.ibadahDone +
+                      monthlyStats.kesehatanDone}
+                  </p>
+                </div>
+
+                <div className="bg-red-50 p-3 rounded-xl">
+                  <p>Tidak Dilakukan</p>
+
+                  <p className="font-bold text-lg">
+                    {ibadahTotal * 30 +
+                      kesehatanTotal * 30 -
+                      (monthlyStats.ibadahDone +
+                        monthlyStats.kesehatanDone)}
+                  </p>
+                </div>
+
+                <div className="bg-yellow-50 p-3 rounded-xl">
+                  <p>Presentase</p>
+
+                  <p className="font-bold text-lg">
+                    {Math.round(
+                      ((monthlyStats.ibadahDone +
+                        monthlyStats.kesehatanDone) /
+                        ((ibadahTotal * 30 +
+                          kesehatanTotal * 30) ||
+                          1)) *
+                        100
+                    )}
+                    %
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
