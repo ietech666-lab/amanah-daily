@@ -162,6 +162,56 @@ const leastConsistent =
     sortedActivities.length - 1
   ];  
 
+const aiEvaluation = () => {
+  if (!mostConsistent || !leastConsistent) {
+    return {
+      best: "-",
+      weak: "-",
+      advice: "Belum ada data yang cukup untuk dievaluasi.",
+      target: "-"
+    };
+  }
+
+  let advice = "";
+
+  if (
+    leastConsistent[0]
+      .toLowerCase()
+      .includes("tahajud")
+  ) {
+    advice =
+      "Cobalah mulai Tahajud minimal 1x per minggu agar lebih mudah membangun konsistensi.";
+  } else if (
+    leastConsistent[0]
+      .toLowerCase()
+      .includes("olahraga") ||
+    leastConsistent[0]
+      .toLowerCase()
+      .includes("workout")
+  ) {
+    advice =
+      "Aktivitas kesehatan masih rendah. Targetkan minimal 3x per minggu.";
+  } else {
+    advice =
+      `Tingkatkan konsistensi aktivitas "${leastConsistent[0]}" agar keseimbangan pengembangan diri lebih baik.`;
+  }
+
+  return {
+    best: `${mostConsistent[0]} (${mostConsistent[1]}x)`,
+
+    weak: `${leastConsistent[0]} (${leastConsistent[1]}x)`,
+
+    advice,
+
+    target:
+      `${leastConsistent[0]} minimal ${
+        leastConsistent[1] + 5
+      }x bulan depan`
+  };
+};
+
+const aiResult = aiEvaluation();  
+
   const saveTitle = async () => {
     await setDoc(doc(db, "settings", "app"), {
       title: newTitle,
@@ -837,36 +887,40 @@ const leastConsistent =
                   </h2>
 
                   <div className="bg-white rounded-2xl p-4 shadow mt-4">
-  <h2 className="font-bold text-lg mb-3">
-    Evaluasi Diri 📈
-  </h2>
+                    <h2 className="font-bold text-lg mb-4">
+                      AI Evaluasi Bulan Ini 🤖
+                    </h2>
 
-  <div className="space-y-3">
-    <div className="bg-green-50 p-3 rounded-xl">
-      <p className="font-semibold text-green-700">
-        Aktivitas Paling Konsisten
-      </p>
+                    <div className="space-y-3 text-sm">
+                      <div className="bg-green-50 p-3 rounded-xl">
+                        <p className="font-bold text-green-700">
+                          🏆 Aktivitas Terbaik
+                        </p>
+                        <p>{aiResult.best}</p>
+                      </div>
 
-      <p className="text-sm mt-1">
-        {mostConsistent
-          ? `${mostConsistent[0]} (${mostConsistent[1]}x)`
-          : '-'}
-      </p>
-    </div>
+                      <div className="bg-red-50 p-3 rounded-xl">
+                        <p className="font-bold text-red-700">
+                          ⚠️ Perlu Ditingkatkan
+                        </p>
+                        <p>{aiResult.weak}</p>
+                      </div>
 
-    <div className="bg-red-50 p-3 rounded-xl">
-      <p className="font-semibold text-red-700">
-        Aktivitas Paling Jarang
-      </p>
+                      <div className="bg-blue-50 p-3 rounded-xl">
+                        <p className="font-bold text-blue-700">
+                          💡 Saran Perbaikan
+                        </p>
+                        <p>{aiResult.advice}</p>
+                      </div>
 
-      <p className="text-sm mt-1">
-        {leastConsistent
-          ? `${leastConsistent[0]} (${leastConsistent[1]}x)`
-          : '-'}
-      </p>
-    </div>
-  </div>
-</div>
+                      <div className="bg-yellow-50 p-3 rounded-xl">
+                        <p className="font-bold text-yellow-700">
+                          🎯 Target Bulan Depan
+                        </p>
+                        <p>{aiResult.target}</p>
+                      </div>
+                    </div>
+                  </div>
 
                   <p className="text-sm text-gray-500 mt-1">
                     Ringkasan habit bulan ini ({daysInMonth} hari)
