@@ -179,6 +179,28 @@ const getActivityStatus = (
     day
   );
 
+  const today = new Date();
+
+  const dateString =
+    checkDate.toISOString().split("T")[0];
+
+  const found = historyData.find(
+    (item) =>
+      item.name === activity &&
+      item.date === dateString
+  );
+
+  if (found) {
+    return "done";
+  }
+
+  if (checkDate > today) {
+    return "future";
+  }
+
+  return "miss";
+};     
+
 const getActivityPercentage = (
   activity
 ) => {
@@ -207,27 +229,6 @@ const getActivityPercentage = (
   );
 };  
 
-  const today = new Date();
-
-  const dateString =
-    checkDate.toISOString().split("T")[0];
-
-  const found = historyData.find(
-    (item) =>
-      item.name === activity &&
-      item.date === dateString
-  );
-
-  if (found) {
-    return "done";
-  }
-
-  if (checkDate > today) {
-    return "future";
-  }
-
-  return "miss";
-};      
 
 const monthlyTotalActivities =
   (ibadahTotal + kesehatanTotal) *
