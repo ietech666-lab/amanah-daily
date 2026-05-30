@@ -250,6 +250,43 @@ export default function DailyChecksheetApp() {
     );
   };
 
+  const getAIInsight = () => {
+    const analysis = filteredActivities.map(
+      (activity) => ({
+        name: activity,
+        percentage:
+          getActivityPercentage(activity),
+      })
+    );
+
+    const sorted = [...analysis].sort(
+      (a, b) =>
+        b.percentage - a.percentage
+    );
+
+    const best = sorted[0];
+
+    const worst =
+      sorted[sorted.length - 1];
+
+    const average = Math.round(
+      analysis.reduce(
+        (sum, item) =>
+          sum + item.percentage,
+        0
+      ) /
+      (analysis.length || 1)
+    );
+
+    return {
+      average,
+      best,
+      worst,
+    };
+  };
+
+  const aiInsight =
+    getAIInsight();
 
   const monthlyTotalActivities =
     (ibadahTotal + kesehatanTotal) *
@@ -1412,6 +1449,25 @@ export default function DailyChecksheetApp() {
                     </tbody>
 
                   </table>
+
+                  <div className="overflow-auto max-h-[70vh]">
+
+                    <table>
+                      ...
+                    </table>
+
+                  </div>
+
+                  {/* TEMPAT AI INSIGHT */}
+
+                  <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+
+                    <h2 className="text-xl font-bold mb-4">
+                      🤖 AI Insight Bulan Ini
+                    </h2>
+
+                    ...
+                  </div>
 
                 </div>
               </p>
