@@ -32,18 +32,18 @@ export default function DailyChecksheetApp() {
 
   const [newTitle, setNewTitle] = useState('Amanah Daily  ✨');
   const [weeklyStats, setWeeklyStats] = useState({
-  ibadahDone: 0,
-  kesehatanDone: 0,
+    ibadahDone: 0,
+    kesehatanDone: 0,
   });
 
   const [monthlyStats, setMonthlyStats] = useState({
-  ibadahDone: 0,
-  kesehatanDone: 0,
+    ibadahDone: 0,
+    kesehatanDone: 0,
   });
 
   const [historyData, setHistoryData] = useState([]);
   const [evaluationFilter, setEvaluationFilter] =
-  useState("all");
+    useState("all");
 
   const [ibadahActivities, setIbadahActivities] = useState([
     'Tahajud',
@@ -60,251 +60,250 @@ export default function DailyChecksheetApp() {
   ]);
 
   useEffect(() => {
-  loadTitle();
-  loadActivities();
-  loadCompletedActivities();
-  loadWeeklyMonthlyStats();
-  loadHistoryData();
-}, []);
+    loadTitle();
+    loadActivities();
+    loadCompletedActivities();
+    loadWeeklyMonthlyStats();
+    loadHistoryData();
+  }, []);
 
   const currentActivities =
     selectedMenu === 'ibadah'
       ? [...ibadahActivities, ...customIbadah]
       : [...kesehatanActivities, ...customKesehatan];
-      const ibadahTotal =
-  ibadahActivities.length + customIbadah.length;
+  const ibadahTotal =
+    ibadahActivities.length + customIbadah.length;
 
-const kesehatanTotal =
-  kesehatanActivities.length +
-  customKesehatan.length;
+  const kesehatanTotal =
+    kesehatanActivities.length +
+    customKesehatan.length;
 
-const ibadahDone = completedActivities.filter(
-  (item) =>
-    [...ibadahActivities, ...customIbadah].includes(
-      item
-    )
-).length;
+  const ibadahDone = completedActivities.filter(
+    (item) =>
+      [...ibadahActivities, ...customIbadah].includes(
+        item
+      )
+  ).length;
 
-const kesehatanDone = completedActivities.filter(
-  (item) =>
-    [
-      ...kesehatanActivities,
-      ...customKesehatan,
-    ].includes(item)
-).length;
+  const kesehatanDone = completedActivities.filter(
+    (item) =>
+      [
+        ...kesehatanActivities,
+        ...customKesehatan,
+      ].includes(item)
+  ).length;
 
-const ibadahNotDone =
-  ibadahTotal - ibadahDone;
+  const ibadahNotDone =
+    ibadahTotal - ibadahDone;
 
-const kesehatanNotDone =
-  kesehatanTotal - kesehatanDone;
+  const kesehatanNotDone =
+    kesehatanTotal - kesehatanDone;
 
-const ibadahPercent =
-  ibadahTotal === 0
-    ? 0
-    : Math.round(
+  const ibadahPercent =
+    ibadahTotal === 0
+      ? 0
+      : Math.round(
         (ibadahDone / ibadahTotal) * 100
       );
 
-const kesehatanPercent =
-  kesehatanTotal === 0
-    ? 0
-    : Math.round(
+  const kesehatanPercent =
+    kesehatanTotal === 0
+      ? 0
+      : Math.round(
         (kesehatanDone / kesehatanTotal) * 100
       );
 
-const totalActivities =
-  ibadahTotal + kesehatanTotal;
+  const totalActivities =
+    ibadahTotal + kesehatanTotal;
 
-const totalCompleted =
-  ibadahDone + kesehatanDone;
+  const totalCompleted =
+    ibadahDone + kesehatanDone;
 
-const totalPercent =
-  totalActivities === 0
-    ? 0
-    : Math.round(
+  const totalPercent =
+    totalActivities === 0
+      ? 0
+      : Math.round(
         (totalCompleted / totalActivities) *
-          100
+        100
       );
 
-const streakDays = weeklyStats.ibadahDone +
-  weeklyStats.kesehatanDone;
+  const streakDays = weeklyStats.ibadahDone +
+    weeklyStats.kesehatanDone;
 
-const currentDate = new Date();
+  const currentDate = new Date();
 
-const daysInMonth = new Date(
-  currentDate.getFullYear(),
-  currentDate.getMonth() + 1,
-  0
-).getDate();
+  const daysInMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  ).getDate();
 
-const monthDays = Array.from(
-  { length: daysInMonth },
-  (_, i) => i + 1
-);
+  const monthDays = Array.from(
+    { length: daysInMonth },
+    (_, i) => i + 1
+  );
 
-const allActivities = [
-  ...ibadahActivities,
-  ...customIbadah,
-  ...kesehatanActivities,
-  ...customKesehatan,
-];
+  const allActivities = [
+    ...ibadahActivities,
+    ...customIbadah,
+    ...kesehatanActivities,
+    ...customKesehatan,
+  ];
 
-const filteredActivities =
-  evaluationFilter === "all"
-    ? allActivities
-    : evaluationFilter === "ibadah"
-    ? [
-        ...ibadahActivities,
-        ...customIbadah,
-      ]
-    : [
-        ...kesehatanActivities,
-        ...customKesehatan,
-      ];
+  const filteredActivities =
+    evaluationFilter === "all"
+      ? allActivities
+      : evaluationFilter === "ibadah"
+        ? [
+          ...ibadahActivities,
+          ...customIbadah,
+        ]
+        : [
+          ...kesehatanActivities,
+          ...customKesehatan,
+        ];
 
-const getActivityStatus = (
-  activity,
-  day
-) => {
-  const currentYear =
-    new Date().getFullYear();
-
-  const currentMonth =
-    new Date().getMonth();
-
-  const checkDate = new Date(
-    currentYear,
-    currentMonth,
+  const getActivityStatus = (
+    activity,
     day
-  );
+  ) => {
+    const currentYear =
+      new Date().getFullYear();
 
-  const today = new Date();
+    const currentMonth =
+      new Date().getMonth();
 
-  const dateString =
-    checkDate.toISOString().split("T")[0];
+    const checkDate = new Date(
+      currentYear,
+      currentMonth,
+      day
+    );
 
-  const found = historyData.find(
-    (item) =>
-      item.name === activity &&
-      item.date === dateString
-  );
+    const today = new Date();
 
-  if (found) {
-    return "done";
-  }
+    const dateString =
+      checkDate.toISOString().split("T")[0];
 
-  if (checkDate > today) {
-    return "future";
-  }
+    const found = historyData.find(
+      (item) =>
+        item.name === activity &&
+        item.date === dateString
+    );
 
-  return "miss";
-};     
-
-const getActivityPercentage = (
-  activity
-) => {
-  const currentDay =
-    new Date().getDate();
-
-  let done = 0;
-
-  for (
-    let day = 1;
-    day <= currentDay;
-    day++
-  ) {
-    if (
-      getActivityStatus(
-        activity,
-        day
-      ) === "done"
-    ) {
-      done++;
+    if (found) {
+      return "done";
     }
-  }
 
-  return Math.round(
-    (done / currentDay) * 100
-  );
-};  
+    if (checkDate > today) {
+      return "future";
+    }
 
-
-const monthlyTotalActivities =
-  (ibadahTotal + kesehatanTotal) *
-  daysInMonth;  
-  
-const activityCounts = {};
-
-historyData.forEach((item) => {
-  if (!activityCounts[item.name]) {
-    activityCounts[item.name] = 0;
-  }
-
-  activityCounts[item.name]++;
-});
-
-const sortedActivities = Object.entries(
-  activityCounts
-).sort((a, b) => b[1] - a[1]);
-
-const mostConsistent =
-  sortedActivities[0];
-
-const leastConsistent =
-  sortedActivities[
-    sortedActivities.length - 1
-  ];  
-
-const aiEvaluation = () => {
-  if (!mostConsistent || !leastConsistent) {
-    return {
-      best: "-",
-      weak: "-",
-      advice: "Belum ada data yang cukup untuk dievaluasi.",
-      target: "-"
-    };
-  }
-
-  let advice = "";
-
-  if (
-    leastConsistent[0]
-      .toLowerCase()
-      .includes("tahajud")
-  ) {
-    advice =
-      "Cobalah mulai Tahajud minimal 1x per minggu agar lebih mudah membangun konsistensi.";
-  } else if (
-    leastConsistent[0]
-      .toLowerCase()
-      .includes("olahraga") ||
-    leastConsistent[0]
-      .toLowerCase()
-      .includes("workout")
-  ) {
-    advice =
-      "Aktivitas kesehatan masih rendah. Targetkan minimal 3x per minggu.";
-  } else {
-    advice =
-      `Tingkatkan konsistensi aktivitas "${leastConsistent[0]}" agar keseimbangan pengembangan diri lebih baik.`;
-  }
-
-  return {
-    best: `${mostConsistent[0]} (${mostConsistent[1]}x)`,
-
-    weak: `${leastConsistent[0]} (${leastConsistent[1]}x)`,
-
-    advice,
-
-    target:
-      `${leastConsistent[0]} minimal ${
-        leastConsistent[1] + 5
-      }x bulan depan`
+    return "miss";
   };
-};
 
-const aiResult = aiEvaluation();  
+  const getActivityPercentage = (
+    activity
+  ) => {
+    const currentDay =
+      new Date().getDate();
+
+    let done = 0;
+
+    for (
+      let day = 1;
+      day <= currentDay;
+      day++
+    ) {
+      if (
+        getActivityStatus(
+          activity,
+          day
+        ) === "done"
+      ) {
+        done++;
+      }
+    }
+
+    return Math.round(
+      (done / currentDay) * 100
+    );
+  };
+
+
+  const monthlyTotalActivities =
+    (ibadahTotal + kesehatanTotal) *
+    daysInMonth;
+
+  const activityCounts = {};
+
+  historyData.forEach((item) => {
+    if (!activityCounts[item.name]) {
+      activityCounts[item.name] = 0;
+    }
+
+    activityCounts[item.name]++;
+  });
+
+  const sortedActivities = Object.entries(
+    activityCounts
+  ).sort((a, b) => b[1] - a[1]);
+
+  const mostConsistent =
+    sortedActivities[0];
+
+  const leastConsistent =
+    sortedActivities[
+    sortedActivities.length - 1
+    ];
+
+  const aiEvaluation = () => {
+    if (!mostConsistent || !leastConsistent) {
+      return {
+        best: "-",
+        weak: "-",
+        advice: "Belum ada data yang cukup untuk dievaluasi.",
+        target: "-"
+      };
+    }
+
+    let advice = "";
+
+    if (
+      leastConsistent[0]
+        .toLowerCase()
+        .includes("tahajud")
+    ) {
+      advice =
+        "Cobalah mulai Tahajud minimal 1x per minggu agar lebih mudah membangun konsistensi.";
+    } else if (
+      leastConsistent[0]
+        .toLowerCase()
+        .includes("olahraga") ||
+      leastConsistent[0]
+        .toLowerCase()
+        .includes("workout")
+    ) {
+      advice =
+        "Aktivitas kesehatan masih rendah. Targetkan minimal 3x per minggu.";
+    } else {
+      advice =
+        `Tingkatkan konsistensi aktivitas "${leastConsistent[0]}" agar keseimbangan pengembangan diri lebih baik.`;
+    }
+
+    return {
+      best: `${mostConsistent[0]} (${mostConsistent[1]}x)`,
+
+      weak: `${leastConsistent[0]} (${leastConsistent[1]}x)`,
+
+      advice,
+
+      target:
+        `${leastConsistent[0]} minimal ${leastConsistent[1] + 5
+        }x bulan depan`
+    };
+  };
+
+  const aiResult = aiEvaluation();
 
   const saveTitle = async () => {
     await setDoc(doc(db, "settings", "app"), {
@@ -326,32 +325,32 @@ const aiResult = aiEvaluation();
   };
 
   const addActivity = async () => {
-  if (!newActivity.trim()) return;
+    if (!newActivity.trim()) return;
 
-  const newData = {
-    name: newActivity,
-    category: activityCategory,
+    const newData = {
+      name: newActivity,
+      category: activityCategory,
+    };
+
+    await addDoc(
+      collection(db, "activities"),
+      newData
+    );
+
+    if (activityCategory === 'ibadah') {
+      setCustomIbadah([
+        ...customIbadah,
+        newActivity,
+      ]);
+    } else {
+      setCustomKesehatan([
+        ...customKesehatan,
+        newActivity,
+      ]);
+    }
+
+    setNewActivity('');
   };
-
-  await addDoc(
-    collection(db, "activities"),
-    newData
-  );
-
-  if (activityCategory === 'ibadah') {
-    setCustomIbadah([
-      ...customIbadah,
-      newActivity,
-    ]);
-  } else {
-    setCustomKesehatan([
-      ...customKesehatan,
-      newActivity,
-    ]);
-  }
-
-  setNewActivity('');
-};
 
   const deleteActivity = (category, item) => {
     if (category === 'ibadah') {
@@ -402,166 +401,166 @@ const aiResult = aiEvaluation();
   };
 
   const loadActivities = async () => {
-  const querySnapshot = await getDocs(
-    collection(db, "activities")
-  );
-
-  const ibadah = [];
-  const kesehatan = [];
-
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-
-    if (data.category === 'ibadah') {
-      ibadah.push(data.name);
-    } else {
-      kesehatan.push(data.name);
-    }
-  });
-
-  setCustomIbadah(ibadah);
-  setCustomKesehatan(kesehatan);
-};
-
-  const toggleActivity = async (item) => {
-  const today =
-    new Date().toISOString().split('T')[0];
-
-  if (completedActivities.includes(item)) {
-    setCompletedActivities(
-      completedActivities.filter((x) => x !== item)
+    const querySnapshot = await getDocs(
+      collection(db, "activities")
     );
 
-    const completedSnapshot = await getDocs(
+    const ibadah = [];
+    const kesehatan = [];
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+
+      if (data.category === 'ibadah') {
+        ibadah.push(data.name);
+      } else {
+        kesehatan.push(data.name);
+      }
+    });
+
+    setCustomIbadah(ibadah);
+    setCustomKesehatan(kesehatan);
+  };
+
+  const toggleActivity = async (item) => {
+    const today =
+      new Date().toISOString().split('T')[0];
+
+    if (completedActivities.includes(item)) {
+      setCompletedActivities(
+        completedActivities.filter((x) => x !== item)
+      );
+
+      const completedSnapshot = await getDocs(
+        collection(db, "completed")
+      );
+
+      completedSnapshot.forEach(async (document) => {
+        const data = document.data();
+
+        if (
+          data.name === item &&
+          data.date === today
+        ) {
+          await deleteDoc(
+            doc(db, "completed", document.id)
+          );
+        }
+      });
+    } else {
+      setCompletedActivities([
+        ...completedActivities,
+        item,
+      ]);
+
+      await addDoc(
+        collection(db, "completed"),
+        {
+          name: item,
+          category:
+            [...ibadahActivities, ...customIbadah].includes(
+              item
+            )
+              ? 'ibadah'
+              : 'kesehatan',
+          date: today,
+        }
+      );
+    }
+
+    loadWeeklyMonthlyStats();
+    loadCompletedActivities();
+  };
+
+  const loadHistoryData = async () => {
+    const snapshot = await getDocs(
       collection(db, "completed")
     );
 
-    completedSnapshot.forEach(async (document) => {
-      const data = document.data();
+    const history = [];
 
-      if (
-        data.name === item &&
-        data.date === today
-      ) {
-        await deleteDoc(
-          doc(db, "completed", document.id)
-        );
+    snapshot.forEach((doc) => {
+      history.push(doc.data());
+    });
+
+    setHistoryData(history);
+  };
+  const loadWeeklyMonthlyStats = async () => {
+    const completedRef = collection(
+      db,
+      "completed"
+    );
+
+    const snapshot = await getDocs(completedRef);
+
+    let weeklyIbadah = 0;
+    let weeklyKesehatan = 0;
+
+    let monthlyIbadah = 0;
+    let monthlyKesehatan = 0;
+
+    const today = new Date();
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+
+      const itemDate = new Date(data.date);
+
+      const diffTime =
+        today.getTime() - itemDate.getTime();
+
+      const diffDays = Math.floor(
+        diffTime / (1000 * 60 * 60 * 24)
+      );
+
+      if (diffDays <= 7) {
+        if (data.category === 'ibadah') {
+          weeklyIbadah++;
+        } else {
+          weeklyKesehatan++;
+        }
+      }
+
+      if (diffDays <= 30) {
+        if (data.category === 'ibadah') {
+          monthlyIbadah++;
+        } else {
+          monthlyKesehatan++;
+        }
       }
     });
-  } else {
-    setCompletedActivities([
-      ...completedActivities,
-      item,
-    ]);
 
-    await addDoc(
-      collection(db, "completed"),
-      {
-        name: item,
-        category:
-          [...ibadahActivities, ...customIbadah].includes(
-            item
-          )
-            ? 'ibadah'
-            : 'kesehatan',
-        date: today,
-      }
-    );
-  }
+    setWeeklyStats({
+      ibadahDone: weeklyIbadah,
+      kesehatanDone: weeklyKesehatan,
+    });
 
-  loadWeeklyMonthlyStats();
-  loadCompletedActivities();
-};
-
-  const loadHistoryData = async () => {
-  const snapshot = await getDocs(
-    collection(db, "completed")
-  );
-
-  const history = [];
-
-  snapshot.forEach((doc) => {
-    history.push(doc.data());
-  });
-
-  setHistoryData(history);
-};
-  const loadWeeklyMonthlyStats = async () => {
-  const completedRef = collection(
-    db,
-    "completed"
-  );
-
-  const snapshot = await getDocs(completedRef);
-
-  let weeklyIbadah = 0;
-  let weeklyKesehatan = 0;
-
-  let monthlyIbadah = 0;
-  let monthlyKesehatan = 0;
-
-  const today = new Date();
-
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-
-    const itemDate = new Date(data.date);
-
-    const diffTime =
-      today.getTime() - itemDate.getTime();
-
-    const diffDays = Math.floor(
-      diffTime / (1000 * 60 * 60 * 24)
-    );
-
-    if (diffDays <= 7) {
-      if (data.category === 'ibadah') {
-        weeklyIbadah++;
-      } else {
-        weeklyKesehatan++;
-      }
-    }
-
-    if (diffDays <= 30) {
-      if (data.category === 'ibadah') {
-        monthlyIbadah++;
-      } else {
-        monthlyKesehatan++;
-      }
-    }
-  });
-
-  setWeeklyStats({
-    ibadahDone: weeklyIbadah,
-    kesehatanDone: weeklyKesehatan,
-  });
-
-  setMonthlyStats({
-    ibadahDone: monthlyIbadah,
-    kesehatanDone: monthlyKesehatan,
-  });
-};
+    setMonthlyStats({
+      ibadahDone: monthlyIbadah,
+      kesehatanDone: monthlyKesehatan,
+    });
+  };
 
   const loadCompletedActivities = async () => {
-  const today =
-    new Date().toISOString().split('T')[0];
+    const today =
+      new Date().toISOString().split('T')[0];
 
-  const querySnapshot = await getDocs(
-    collection(db, "completed")
-  );
+    const querySnapshot = await getDocs(
+      collection(db, "completed")
+    );
 
-  const completed = [];
+    const completed = [];
 
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
 
-    if (data.date === today) {
-      completed.push(data.name);
-    }
-  });
+      if (data.date === today) {
+        completed.push(data.name);
+      }
+    });
 
-  setCompletedActivities(completed);
-};
+    setCompletedActivities(completed);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 pb-24">
@@ -595,7 +594,7 @@ const aiResult = aiEvaluation();
 
               <div className="w-full bg-white/20 h-3 rounded-full overflow-hidden">
                 <div className="bg-white h-3 rounded-full"
-                      style={{ width: `${totalPercent}%` }}
+                  style={{ width: `${totalPercent}%` }}
                 ></div>
               </div>
 
@@ -654,7 +653,7 @@ const aiResult = aiEvaluation();
 
             <div className="bg-white rounded-2xl p-4 shadow mt-4">
               <h2 className="font-bold text-lg mb-4">
-                 Statistik Bulanan 📊
+                Statistik Bulanan 📊
               </h2>
 
               <div className="space-y-3">
@@ -693,7 +692,7 @@ const aiResult = aiEvaluation();
                       ((monthlyStats.ibadahDone +
                         monthlyStats.kesehatanDone) /
                         (monthlyTotalActivities || 1)) *
-                        100
+                      100
                     )}
                     %
                   </p>
@@ -703,20 +702,20 @@ const aiResult = aiEvaluation();
           </div>
         )}
 
-            <div className="bg-white rounded-2xl p-4 shadow mt-4">
-              <h2 className="font-bold text-lg mb-3">
-                AI Evaluasi Otomatis 🤖
-              </h2>
+        <div className="bg-white rounded-2xl p-4 shadow mt-4">
+          <h2 className="font-bold text-lg mb-3">
+            AI Evaluasi Otomatis 🤖
+          </h2>
 
-              <div className="bg-slate-50 p-4 rounded-xl">
-                <p className="text-sm leading-relaxed">
-                  {leastConsistent
-                    ? `Kamu cukup konsisten dalam beberapa aktivitas, namun "${leastConsistent[0]}" masih jarang dilakukan. Cobalah lebih fokus dan konsisten agar perkembangan diri menjadi lebih baik setiap harinya.`
-                    : 'Belum ada data evaluasi.'}
-                </p>
-              </div>
-            </div>
-            
+          <div className="bg-slate-50 p-4 rounded-xl">
+            <p className="text-sm leading-relaxed">
+              {leastConsistent
+                ? `Kamu cukup konsisten dalam beberapa aktivitas, namun "${leastConsistent[0]}" masih jarang dilakukan. Cobalah lebih fokus dan konsisten agar perkembangan diri menjadi lebih baik setiap harinya.`
+                : 'Belum ada data evaluasi.'}
+            </p>
+          </div>
+        </div>
+
         {activeTab === 'activity' && (
           <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100 space-y-4">
             <div className="flex items-center justify-between">
@@ -738,11 +737,10 @@ const aiResult = aiEvaluation();
             {currentActivities.map((item, index) => (
               <div
                 key={index}
-                className={`rounded-[24px] p-5 flex items-center justify-between border transition-all hover:shadow-lg ${
-                  completedActivities.includes(item)
-                    ? 'bg-gradient-to-r from-green-100 to-emerald-50 border-green-200'
-                    : 'bg-gradient-to-r from-gray-50 to-white border-gray-100'
-                }`}
+                className={`rounded-[24px] p-5 flex items-center justify-between border transition-all hover:shadow-lg ${completedActivities.includes(item)
+                  ? 'bg-gradient-to-r from-green-100 to-emerald-50 border-green-200'
+                  : 'bg-gradient-to-r from-gray-50 to-white border-gray-100'
+                  }`}
               >
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col gap-1">
@@ -774,11 +772,10 @@ const aiResult = aiEvaluation();
 
                 <button
                   onClick={() => toggleActivity(item)}
-                  className={`w-9 h-9 rounded-full border-[5px] shadow-md hover:scale-110 transition-all flex items-center justify-center text-white text-sm font-bold ${
-                    completedActivities.includes(item)
-                      ? 'bg-green-500 border-green-100'
-                      : 'bg-white border-gray-300'
-                  }`}
+                  className={`w-9 h-9 rounded-full border-[5px] shadow-md hover:scale-110 transition-all flex items-center justify-center text-white text-sm font-bold ${completedActivities.includes(item)
+                    ? 'bg-green-500 border-green-100'
+                    : 'bg-white border-gray-300'
+                    }`}
                 >
                   {completedActivities.includes(item) ? '✓' : ''}
                 </button>
@@ -895,28 +892,26 @@ const aiResult = aiEvaluation();
                     title: 'Ibadah',
                     total: `${ibadahTotal * 7} Aktivitas`,
                     done: `${weeklyStats.ibadahDone} Aktivitas`,
-                    notDone: `${
-                      ibadahTotal * 7 -
+                    notDone: `${ibadahTotal * 7 -
                       weeklyStats.ibadahDone
-                    } Aktivitas`,
+                      } Aktivitas`,
                     value: `${Math.round(
                       (weeklyStats.ibadahDone /
                         (ibadahTotal * 7 || 1)) *
-                        100
+                      100
                     )}%`,
                   },
                   {
                     title: 'Kesehatan',
                     total: `${kesehatanTotal * 7} Aktivitas`,
                     done: `${weeklyStats.kesehatanDone} Aktivitas`,
-                    notDone: `${
-                      kesehatanTotal * 7 -
+                    notDone: `${kesehatanTotal * 7 -
                       weeklyStats.kesehatanDone
-                    } Aktivitas`,
+                      } Aktivitas`,
                     value: `${Math.round(
                       (weeklyStats.kesehatanDone /
                         (kesehatanTotal * 7 || 1)) *
-                        100
+                      100
                     )}%`,
                   },
                 ].map((item, index) => (
@@ -1030,13 +1025,12 @@ const aiResult = aiEvaluation();
                     title: 'Ibadah',
                     total: `${ibadahTotal * daysInMonth} Aktivitas`,
                     done: `${monthlyStats.ibadahDone} Aktivitas`,
-                    notDone: `${
-                      ibadahTotal * daysInMonth -
+                    notDone: `${ibadahTotal * daysInMonth -
                       monthlyStats.ibadahDone
-                    } Aktivitas`,
+                      } Aktivitas`,
                     value: `${Math.round(
                       (monthlyStats.ibadahDone /
-                      (ibadahTotal * daysInMonth || 1)) *
+                        (ibadahTotal * daysInMonth || 1)) *
                       100
                     )}%`,
                   },
@@ -1044,15 +1038,14 @@ const aiResult = aiEvaluation();
                     title: 'Kesehatan',
                     total: `${kesehatanTotal * daysInMonth} Aktivitas`,
                     done: `${monthlyStats.kesehatanDone} Aktivitas`,
-                    notDone: `${
-                      kesehatanTotal * daysInMonth -
+                    notDone: `${kesehatanTotal * daysInMonth -
                       monthlyStats.kesehatanDone
-                    } Aktivitas`,
+                      } Aktivitas`,
                     value: `${Math.round(
                       (monthlyStats.kesehatanDone /
-                      (kesehatanTotal * daysInMonth || 1)) *
+                        (kesehatanTotal * daysInMonth || 1)) *
                       100
-                    )}%`,   
+                    )}%`,
                   },
                 ].map((item, index) => (
                   <div key={index}>
@@ -1130,11 +1123,10 @@ const aiResult = aiEvaluation();
                   onClick={() =>
                     setEvaluationFilter("all")
                   }
-                  className={`flex-1 rounded-2xl py-3 font-semibold ${
-                    evaluationFilter === "all"
-                      ? "bg-green-600 text-white"
-                      : "bg-gray-100"
-                  }`}
+                  className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "all"
+                    ? "bg-green-600 text-white"
+                    : "bg-gray-100"
+                    }`}
                 >
                   Semua
                 </button>
@@ -1143,30 +1135,112 @@ const aiResult = aiEvaluation();
                   onClick={() =>
                     setEvaluationFilter("ibadah")
                   }
-                  className={`flex-1 rounded-2xl py-3 font-semibold ${
-                    evaluationFilter === "ibadah"
-                      ? "bg-green-600 text-white"
-                      : "bg-gray-100"
-                  }`}
+                  className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "ibadah"
+                    ? "bg-green-600 text-white"
+                    : "bg-gray-100"
+                    }`}
                 >
                   Ibadah
                 </button>
 
                 <button
-                   onClick={() =>
-                     setEvaluationFilter("kesehatan")
+                  onClick={() =>
+                    setEvaluationFilter("kesehatan")
                   }
-                  className={`flex-1 rounded-2xl py-3 font-semibold ${
-                    evaluationFilter === "kesehatan"
-                      ? "bg-green-600 text-white"
-                      : "bg-gray-100"
-                  }`}
+                  className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "kesehatan"
+                    ? "bg-green-600 text-white"
+                    : "bg-gray-100"
+                    }`}
                 >
                   Kesehatan
                 </button>
 
               </div>
-             </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+
+              <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-3xl p-4 shadow-lg">
+                <p className="text-xs opacity-90">
+                  🏆 Aktivitas Terbaik
+                </p>
+
+                <p className="font-bold text-lg mt-2">
+                  {mostConsistent
+                    ? mostConsistent[0]
+                    : "-"}
+                </p>
+
+                <p className="text-sm opacity-90">
+                  {mostConsistent
+                    ? `${mostConsistent[1]}x`
+                    : ""}
+                </p>
+              </div>
+
+              <div className="bg-white rounded-3xl p-4 shadow-lg mt-4">
+
+                <div className="flex justify-between mb-2">
+                  <span className="font-semibold">
+                    📊 Konsistensi Bulan Ini
+                  </span>
+
+                  <span className="font-bold text-green-600">
+                    {Math.round(
+                      (
+                        (
+                          monthlyStats.ibadahDone +
+                          monthlyStats.kesehatanDone
+                        ) /
+                        (
+                          monthlyTotalActivities || 1
+                        )
+                      ) * 100
+                    )}
+                    %
+                  </span>
+                </div>
+
+                <div className="w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-4 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
+                    style={{
+                      width: `${Math.round(
+                        (
+                          (
+                            monthlyStats.ibadahDone +
+                            monthlyStats.kesehatanDone
+                          ) /
+                          (
+                            monthlyTotalActivities || 1
+                          )
+                        ) * 100
+                      )}%`
+                    }}
+                  />
+                </div>
+
+              </div>
+
+              <div className="bg-gradient-to-r from-red-500 to-rose-500 text-white rounded-3xl p-4 shadow-lg">
+                <p className="text-xs opacity-90">
+                  ⚠️ Perlu Ditingkatkan
+                </p>
+
+                <p className="font-bold text-lg mt-2">
+                  {leastConsistent
+                    ? leastConsistent[0]
+                    : "-"}
+                </p>
+
+                <p className="text-sm opacity-90">
+                  {leastConsistent
+                    ? `${leastConsistent[1]}x`
+                    : ""}
+                </p>
+              </div>
+
+            </div>
 
             <div className="bg-white rounded-[32px] p-6 shadow-xl">
               <p className="text-center text-gray-500">
@@ -1224,9 +1298,9 @@ const aiResult = aiEvaluation();
                               ) === "done" ? (
                                 <div className="w-5 h-5 mx-auto rounded bg-emerald-500"></div>
                               ) : getActivityStatus(
-                                  activity,
-                                  day
-                                ) === "future" ? (
+                                activity,
+                                day
+                              ) === "future" ? (
                                 <div className="w-5 h-5 mx-auto rounded bg-slate-200"></div>
                               ) : (
                                 <div className="w-5 h-5 mx-auto rounded bg-rose-500"></div>
@@ -1236,7 +1310,16 @@ const aiResult = aiEvaluation();
                           ))}
 
                           <td className="text-center font-bold text-slate-600">
-                            {getActivityPercentage(activity)}%
+                            <span
+                              className={`font-bold ${getActivityPercentage(activity) >= 80
+                                ? "text-green-600"
+                                : getActivityPercentage(activity) >= 50
+                                  ? "text-yellow-500"
+                                  : "text-red-500"
+                                }`}
+                            >
+                              {getActivityPercentage(activity)}%
+                            </span>
                           </td>
 
                         </tr>
@@ -1251,8 +1334,8 @@ const aiResult = aiEvaluation();
               </p>
             </div>
 
-            </div>
-          )}
+          </div>
+        )}
 
         {activeTab === 'profile' && (
           <div className="space-y-4">
@@ -1396,10 +1479,10 @@ const aiResult = aiEvaluation();
                     {((deleteCategory === 'ibadah'
                       ? [...ibadahActivities, ...customIbadah].length
                       : [...kesehatanActivities, ...customKesehatan].length) === 0) && (
-                      <div className="bg-white rounded-2xl p-5 text-center text-gray-400 text-sm">
-                        Belum ada aktivitas custom
-                      </div>
-                    )}
+                        <div className="bg-white rounded-2xl p-5 text-center text-gray-400 text-sm">
+                          Belum ada aktivitas custom
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>
@@ -1412,11 +1495,10 @@ const aiResult = aiEvaluation();
         <div className="max-w-md mx-auto bg-white rounded-[28px] shadow-2xl border border-gray-100 px-6 py-4 flex justify-around items-center">
           <button
             onClick={() => setActiveTab('home')}
-            className={`flex flex-col items-center text-xs transition-all ${
-              activeTab === 'home'
-                ? 'text-green-700 scale-105 font-bold'
-                : 'text-gray-500'
-            }`}
+            className={`flex flex-col items-center text-xs transition-all ${activeTab === 'home'
+              ? 'text-green-700 scale-105 font-bold'
+              : 'text-gray-500'
+              }`}
           >
             <span className="text-2xl">🏠</span>
             Home
@@ -1424,11 +1506,10 @@ const aiResult = aiEvaluation();
 
           <button
             onClick={() => setActiveTab('statistik')}
-            className={`flex flex-col items-center text-xs transition-all ${
-              activeTab === 'statistik'
-                ? 'text-green-700 scale-105 font-bold'
-                : 'text-gray-500'
-            }`}
+            className={`flex flex-col items-center text-xs transition-all ${activeTab === 'statistik'
+              ? 'text-green-700 scale-105 font-bold'
+              : 'text-gray-500'
+              }`}
           >
             <span className="text-2xl">📈</span>
             Statistik
@@ -1436,11 +1517,10 @@ const aiResult = aiEvaluation();
 
           <button
             onClick={() => setActiveTab('evaluasi')}
-            className={`flex flex-col items-center text-xs transition-all ${
-              activeTab === 'evaluasi'
-                ? 'text-green-700 scale-105 font-bold'
-                : 'text-gray-500'
-            }`}
+            className={`flex flex-col items-center text-xs transition-all ${activeTab === 'evaluasi'
+              ? 'text-green-700 scale-105 font-bold'
+              : 'text-gray-500'
+              }`}
           >
             <span className="text-2xl">📋</span>
             Evaluasi
@@ -1448,11 +1528,10 @@ const aiResult = aiEvaluation();
 
           <button
             onClick={() => setActiveTab('profile')}
-            className={`flex flex-col items-center text-xs transition-all ${
-              activeTab === 'profile'
-                ? 'text-green-700 scale-105 font-bold'
-                : 'text-gray-500'
-            }`}
+            className={`flex flex-col items-center text-xs transition-all ${activeTab === 'profile'
+              ? 'text-green-700 scale-105 font-bold'
+              : 'text-gray-500'
+              }`}
           >
             <span className="text-2xl">👤</span>
             Profile
