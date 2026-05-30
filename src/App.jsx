@@ -45,12 +45,33 @@ export default function DailyChecksheetApp() {
   const [evaluationFilter, setEvaluationFilter] =
     useState("all");
 
+  const [selectedMonth, setSelectedMonth] =
+    useState(new Date().getMonth());
+
+  const [selectedYear, setSelectedYear] =
+    useState(new Date().getFullYear());
+
   const [ibadahActivities, setIbadahActivities] = useState([
     'Tahajud',
     'Subuh',
     'Dzikir Pagi',
     'Dhuha',
   ]);
+
+  const monthNames = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
 
   const [kesehatanActivities, setKesehatanActivities] = useState([
     'Workout',
@@ -133,8 +154,8 @@ export default function DailyChecksheetApp() {
   const currentDate = new Date();
 
   const daysInMonth = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 1,
+    selectedYear,
+    selectedMonth + 1,
     0
   ).getDate();
 
@@ -174,8 +195,8 @@ export default function DailyChecksheetApp() {
       new Date().getMonth();
 
     const checkDate = new Date(
-      currentYear,
-      currentMonth,
+      selectedYear,
+      selectedMonth,
       day
     );
 
@@ -1114,6 +1135,33 @@ export default function DailyChecksheetApp() {
               <p className="mt-2 text-sm opacity-90">
                 Monitoring dan evaluasi aktivitas bulanan
               </p>
+            </div>
+
+            <div className="mt-4">
+              <select
+                value={selectedMonth}
+                onChange={(e) =>
+                  setSelectedMonth(Number(e.target.value))
+                }
+                className="
+                  w-full
+                  rounded-2xl
+                  border
+                  p-3
+                  bg-white
+                  text-gray-700
+                  font-medium
+                "
+              >
+                {monthNames.map((month, index) => (
+                  <option
+                    key={index}
+                    value={index}
+                  >
+                    {month} {selectedYear}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="bg-white rounded-[32px] p-4 shadow-xl">
