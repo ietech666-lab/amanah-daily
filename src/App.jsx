@@ -143,6 +143,26 @@ const monthDays = Array.from(
   (_, i) => i + 1
 );
 
+const allActivities = [
+  ...ibadahActivities,
+  ...customIbadah,
+  ...kesehatanActivities,
+  ...customKesehatan,
+];
+
+const filteredActivities =
+  evaluationFilter === "all"
+    ? allActivities
+    : evaluationFilter === "ibadah"
+    ? [
+        ...ibadahActivities,
+        ...customIbadah,
+      ]
+    : [
+        ...kesehatanActivities,
+        ...customKesehatan,
+      ];
+
 const monthlyTotalActivities =
   (ibadahTotal + kesehatanTotal) *
   daysInMonth;  
@@ -1111,6 +1131,40 @@ const aiResult = aiEvaluation();
                       </tr>
 
                     </thead>
+
+                    <tbody>
+
+                      {filteredActivities.map((activity) => (
+
+                        <tr
+                          key={activity}
+                          className="border-t hover:bg-slate-50"
+                        >
+
+                          <td className="sticky left-0 bg-white p-3 font-semibold whitespace-nowrap">
+                            {activity}
+                          </td>
+
+                          {monthDays.map((day) => (
+
+                            <td
+                              key={day}
+                              className="text-center p-2"
+                            >
+                              ⬜
+                            </td>
+
+                          ))}
+
+                          <td className="text-center font-bold text-slate-600">
+                            0%
+                          </td>
+
+                        </tr>
+
+                      ))}
+
+                    </tbody>
 
                   </table>
 
