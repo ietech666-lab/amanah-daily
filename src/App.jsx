@@ -163,6 +163,72 @@ const filteredActivities =
         ...customKesehatan,
       ];
 
+const getActivityStatus = (
+  activity,
+  day
+) => {
+  const currentYear =
+    new Date().getFullYear();
+
+  const currentMonth =
+    new Date().getMonth();
+
+  const checkDate = new Date(
+    currentYear,
+    currentMonth,
+    day
+  );
+
+const getActivityPercentage = (
+  activity
+) => {
+  const currentDay =
+    new Date().getDate();
+
+  let done = 0;
+
+  for (
+    let day = 1;
+    day <= currentDay;
+    day++
+  ) {
+    if (
+      getActivityStatus(
+        activity,
+        day
+      ) === "done"
+    ) {
+      done++;
+    }
+  }
+
+  return Math.round(
+    (done / currentDay) * 100
+  );
+};  
+
+  const today = new Date();
+
+  const dateString =
+    checkDate.toISOString().split("T")[0];
+
+  const found = historyData.find(
+    (item) =>
+      item.name === activity &&
+      item.date === dateString
+  );
+
+  if (found) {
+    return "done";
+  }
+
+  if (checkDate > today) {
+    return "future";
+  }
+
+  return "miss";
+};      
+
 const monthlyTotalActivities =
   (ibadahTotal + kesehatanTotal) *
   daysInMonth;  
@@ -1151,13 +1217,25 @@ const aiResult = aiEvaluation();
                               key={day}
                               className="text-center p-2"
                             >
-                              ⬜
+                              {getActivityStatus(
+                                activity,
+                                day
+                              ) === "done" ? (
+                                <div className="w-5 h-5 mx-auto rounded bg-emerald-500"></div>
+                              ) : getActivityStatus(
+                                  activity,
+                                  day
+                                ) === "future" ? (
+                                <div className="w-5 h-5 mx-auto rounded bg-slate-200"></div>
+                              ) : (
+                                <div className="w-5 h-5 mx-auto rounded bg-rose-500"></div>
+                              )}
                             </td>
 
                           ))}
 
                           <td className="text-center font-bold text-slate-600">
-                            0%
+                            {getActivityPercentage(activity)}%
                           </td>
 
                         </tr>
