@@ -42,6 +42,8 @@ export default function DailyChecksheetApp() {
   });
 
   const [historyData, setHistoryData] = useState([]);
+  const [evaluationFilter, setEvaluationFilter] =
+  useState("all");
 
   const [ibadahActivities, setIbadahActivities] = useState([
     'Tahajud',
@@ -1016,6 +1018,73 @@ const aiResult = aiEvaluation();
           </div>
         )}
 
+        {activeTab === 'evaluasi' && (
+          <div className="space-y-5">
+
+            <div className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-[32px] p-6 shadow-xl">
+              <h2 className="text-3xl font-black">
+                📋 Evaluasi Aktivitas
+              </h2>
+
+              <p className="mt-2 text-sm opacity-90">
+                Monitoring dan evaluasi aktivitas bulanan
+              </p>
+            </div>
+
+            <div className="bg-white rounded-[32px] p-4 shadow-xl">
+              <div className="flex gap-2">
+
+                <button
+                  onClick={() =>
+                    setEvaluationFilter("all")
+                  }
+                  className={`flex-1 rounded-2xl py-3 font-semibold ${
+                    evaluationFilter === "all"
+                      ? "bg-green-600 text-white"
+                      : "bg-gray-100"
+                  }`}
+                >
+                  Semua
+                </button>
+
+                <button
+                  onClick={() =>
+                    setEvaluationFilter("ibadah")
+                  }
+                  className={`flex-1 rounded-2xl py-3 font-semibold ${
+                    evaluationFilter === "ibadah"
+                      ? "bg-green-600 text-white"
+                      : "bg-gray-100"
+                  }`}
+                >
+                  Ibadah
+                </button>
+
+                <button
+                   onClick={() =>
+                     setEvaluationFilter("kesehatan")
+                  }
+                  className={`flex-1 rounded-2xl py-3 font-semibold ${
+                    evaluationFilter === "kesehatan"
+                      ? "bg-green-600 text-white"
+                      : "bg-gray-100"
+                  }`}
+                >
+                  Kesehatan
+                </button>
+
+              </div>
+             </div>
+
+            <div className="bg-white rounded-[32px] p-6 shadow-xl">
+              <p className="text-center text-gray-500">
+                Tabel Evaluasi Premium akan muncul di sini 🚀
+              </p>
+            </div>
+
+            </div>
+          )}
+          
         {activeTab === 'profile' && (
           <div className="space-y-4">
             <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
@@ -1194,6 +1263,18 @@ const aiResult = aiEvaluation();
           >
             <span className="text-2xl">📈</span>
             Statistik
+          </button>
+
+          <button
+            onClick={() => setActiveTab('evaluasi')}
+            className={`flex flex-col items-center text-xs transition-all ${
+              activeTab === 'evaluasi'
+                ? 'text-green-700 scale-105 font-bold'
+                : 'text-gray-500'
+            }`}
+          >
+            <span className="text-2xl">📋</span>
+            Evaluasi
           </button>
 
           <button
