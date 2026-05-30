@@ -1244,7 +1244,7 @@ export default function DailyChecksheetApp() {
 
             <div className="bg-white rounded-[32px] p-6 shadow-xl">
               <p className="text-center text-gray-500">
-                <div className="overflow-x-auto">
+                <div className="overflow-auto max-h-[70vh]">
 
                   <table className="min-w-full text-xs border-collapse">
 
@@ -1252,14 +1252,37 @@ export default function DailyChecksheetApp() {
 
                       <tr>
 
-                        <th className="sticky left-0 bg-white p-3 text-left font-bold">
+                        <th
+                          className="
+                            sticky
+                            top-0
+                            left-0
+                            z-30
+                            bg-white
+                            p-3
+                            text-left
+                            font-bold
+                            border-b
+                            shadow-sm
+                          "
+                        >
                           Aktivitas
                         </th>
 
                         {monthDays.map((day) => (
                           <th
                             key={day}
-                            className="p-2 text-center font-semibold min-w-[36px]"
+                            className="
+                              sticky
+                              top-0
+                              z-10
+                              bg-white
+                              p-2
+                              text-center
+                              font-semibold
+                              min-w-[36px]
+                              border-b
+                            "
                           >
                             {day}
                           </th>
@@ -1282,7 +1305,19 @@ export default function DailyChecksheetApp() {
                           className="border-t hover:bg-slate-50"
                         >
 
-                          <td className="sticky left-0 bg-white p-3 font-semibold whitespace-nowrap">
+                          <td
+                            className="
+                              sticky
+                              left-0
+                              z-20
+                              bg-white
+                              p-3
+                              font-semibold
+                              whitespace-nowrap
+                              border-r
+                              shadow-sm
+                            "
+                          >
                             {activity}
                           </td>
 
