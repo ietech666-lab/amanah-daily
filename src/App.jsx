@@ -138,6 +138,11 @@ const daysInMonth = new Date(
   0
 ).getDate();
 
+const monthDays = Array.from(
+  { length: daysInMonth },
+  (_, i) => i + 1
+);
+
 const monthlyTotalActivities =
   (ibadahTotal + kesehatanTotal) *
   daysInMonth;  
@@ -1078,13 +1083,44 @@ const aiResult = aiEvaluation();
 
             <div className="bg-white rounded-[32px] p-6 shadow-xl">
               <p className="text-center text-gray-500">
-                Tabel Evaluasi Premium akan muncul di sini 🚀
+                <div className="overflow-x-auto">
+
+                  <table className="min-w-full text-xs border-collapse">
+
+                    <thead>
+
+                      <tr>
+
+                        <th className="sticky left-0 bg-white p-3 text-left font-bold">
+                          Aktivitas
+                        </th>
+
+                        {monthDays.map((day) => (
+                          <th
+                            key={day}
+                            className="p-2 text-center font-semibold min-w-[36px]"
+                          >
+                            {day}
+                          </th>
+                        ))}
+
+                        <th className="p-3 text-center font-bold">
+                          %
+                        </th>
+
+                      </tr>
+
+                    </thead>
+
+                  </table>
+
+                </div>
               </p>
             </div>
 
             </div>
           )}
-          
+
         {activeTab === 'profile' && (
           <div className="space-y-4">
             <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
