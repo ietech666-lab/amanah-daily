@@ -126,7 +126,19 @@ const totalPercent =
       );
 
 const streakDays = weeklyStats.ibadahDone +
-  weeklyStats.kesehatanDone;  
+  weeklyStats.kesehatanDone;
+
+const currentDate = new Date();
+
+const daysInMonth = new Date(
+  currentDate.getFullYear(),
+  currentDate.getMonth() + 1,
+  0
+).getDate();
+
+const monthlyTotalActivities =
+  (ibadahTotal + kesehatanTotal) *
+  daysInMonth;  
   
 const activityCounts = {};
 
@@ -506,8 +518,7 @@ const leastConsistent =
                   <p>Total Aktivitas</p>
 
                   <p className="font-bold text-lg">
-                    {ibadahTotal * 30 +
-                      kesehatanTotal * 30}
+                    {monthlyTotalActivities}
                   </p>
                 </div>
 
@@ -524,8 +535,7 @@ const leastConsistent =
                   <p>Tidak Dilakukan</p>
 
                   <p className="font-bold text-lg">
-                    {ibadahTotal * 30 +
-                      kesehatanTotal * 30 -
+                    {monthlyTotalActivities -
                       (monthlyStats.ibadahDone +
                         monthlyStats.kesehatanDone)}
                   </p>
@@ -538,9 +548,7 @@ const leastConsistent =
                     {Math.round(
                       ((monthlyStats.ibadahDone +
                         monthlyStats.kesehatanDone) /
-                        ((ibadahTotal * 30 +
-                          kesehatanTotal * 30) ||
-                          1)) *
+                        (monthlyTotalActivities || 1)) *
                         100
                     )}
                     %
