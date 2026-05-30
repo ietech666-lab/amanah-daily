@@ -869,7 +869,7 @@ const leastConsistent =
 </div>
 
                   <p className="text-sm text-gray-500 mt-1">
-                    Ringkasan habit selama 30 hari
+                    Ringkasan habit bulan ini ({daysInMonth} hari)
                   </p>
                 </div>
 
@@ -880,29 +880,29 @@ const leastConsistent =
                 {[
                   {
                     title: 'Ibadah',
-                    total: `${ibadahTotal * 30} Aktivitas`,
+                    total: `${ibadahTotal * daysInMonth} Aktivitas`,
                     done: `${monthlyStats.ibadahDone} Aktivitas`,
                     notDone: `${
-                      ibadahTotal * 30 -
+                      ibadahTotal * daysInMonth -
                       monthlyStats.ibadahDone
                     } Aktivitas`,
                     value: `${Math.round(
                       (monthlyStats.ibadahDone /
-                      (ibadahTotal * 30 || 1)) *
+                      (ibadahTotal * daysInMonth || 1)) *
                       100
                     )}%`,
                   },
                   {
                     title: 'Kesehatan',
-                    total: `${kesehatanTotal * 30} Aktivitas`,
+                    total: `${kesehatanTotal * daysInMonth} Aktivitas`,
                     done: `${monthlyStats.kesehatanDone} Aktivitas`,
                     notDone: `${
-                      kesehatanTotal * 30 -
+                      kesehatanTotal * daysInMonth -
                       monthlyStats.kesehatanDone
                     } Aktivitas`,
                     value: `${Math.round(
                       (monthlyStats.kesehatanDone /
-                      (kesehatanTotal * 30 || 1)) *
+                      (kesehatanTotal * daysInMonth || 1)) *
                       100
                     )}%`,   
                   },
