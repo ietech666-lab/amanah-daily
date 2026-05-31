@@ -464,29 +464,21 @@ export default function DailyChecksheetApp() {
       snapshot.size
     );
 
-    snapshot.forEach(async (document) => {
-      await deleteDoc(
-        doc(
-          db,
-          "activities",
-          document.id
-        )
+    snapshot.forEach((document) => {
+      console.log(
+        "DOC DITEMUKAN:",
+        document.id,
+        document.data()
       );
     });
 
-    if (category === "ibadah") {
-      setCustomIbadah(
-        customIbadah.filter(
-          (x) => x !== item
-        )
-      );
-    } else {
-      setCustomKesehatan(
-        customKesehatan.filter(
-          (x) => x !== item
-        )
+    for (const document of snapshot.docs) {
+      await deleteDoc(
+        doc(db, "activities", document.id)
       );
     }
+
+    await loadActivities();
   };
 
   const moveActivity = (direction, index) => {
