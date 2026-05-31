@@ -1294,103 +1294,102 @@ export default function DailyChecksheetApp() {
                     <table>
                     </table>
 
-                  </div>
+                  </div>   {/* tutup overflow-auto */}
+                </div>   {/* tutup overflow-auto */}
 
-                  {/* TEMPAT AI INSIGHT */}
+                {/* TEMPAT AI INSIGHT */}
 
-                  <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+                <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
 
-                    <h2 className="text-xl font-bold mb-4">
-                      🤖 AI Insight Bulan Ini
-                    </h2>
+                  <h2 className="text-xl font-bold mb-4">
+                    🤖 AI Insight Bulan Ini
+                  </h2>
 
-                    <div className="space-y-3">
+                  <div className="space-y-3">
 
-                      <div className="bg-blue-50 p-3 rounded-xl">
-                        <p className="font-bold text-blue-700">
-                          📈 Konsistensi Keseluruhan
-                        </p>
-                        <p>{Math.round(
-                          (
-                            (monthlyStats.ibadahDone +
-                              monthlyStats.kesehatanDone) /
-                            (monthlyTotalActivities || 1)
-                          ) * 100
-                        )}%</p>
-                      </div>
+                    <div className="bg-blue-50 p-3 rounded-xl">
+                      <p className="font-bold text-blue-700">
+                        📈 Konsistensi Keseluruhan
+                      </p>
+                      <p>{Math.round(
+                        (
+                          (monthlyStats.ibadahDone +
+                            monthlyStats.kesehatanDone) /
+                          (monthlyTotalActivities || 1)
+                        ) * 100
+                      )}%</p>
+                    </div>
 
-                      <div className="bg-green-50 p-3 rounded-xl">
-                        <p className="font-bold text-green-700">
-                          🏆 Aktivitas Terbaik
-                        </p>
-                        <p>
-                          {aiResult.best}
-                        </p>
-                      </div>
+                    <div className="bg-green-50 p-3 rounded-xl">
+                      <p className="font-bold text-green-700">
+                        🏆 Aktivitas Terbaik
+                      </p>
+                      <p>
+                        {aiResult.best}
+                      </p>
+                    </div>
 
-                      <div className="bg-red-50 p-3 rounded-xl">
-                        <p className="font-bold text-red-700">
-                          ⚠️ Aktivitas Terlemah
-                        </p>
-                        <p>
-                          {aiResult.weak}
-                        </p>
-                      </div>
+                    <div className="bg-red-50 p-3 rounded-xl">
+                      <p className="font-bold text-red-700">
+                        ⚠️ Aktivitas Terlemah
+                      </p>
+                      <p>
+                        {aiResult.weak}
+                      </p>
+                    </div>
 
-                      <div className="bg-yellow-50 p-3 rounded-xl">
-                        <p className="font-bold text-yellow-700">
-                          🎯 Target Bulan Depan
-                        </p>
-                        <p>
-                          Tingkatkan konsistensi menjadi{" "}
-                          {aiResult.target}
-                        </p>
-                      </div>
+                    <div className="bg-yellow-50 p-3 rounded-xl">
+                      <p className="font-bold text-yellow-700">
+                        🎯 Target Bulan Depan
+                      </p>
+                      <p>
+                        Tingkatkan konsistensi menjadi{" "}
+                        {aiResult.target}
+                      </p>
+                    </div>
 
-                      <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+                    <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
 
-                        <h2 className="text-xl font-bold mb-4">
-                          📈 Trend Konsistensi
-                        </h2>
+                      <h2 className="text-xl font-bold mb-4">
+                        📈 Trend Konsistensi
+                      </h2>
 
-                        <div className="space-y-3">
-                          {monthlyTrend.map((item) => (
+                      <div className="space-y-3">
+                        {monthlyTrend.map((item) => (
 
-                            <div key={item.month}>
+                          <div key={item.month}>
 
-                              <div className="flex justify-between mb-1">
+                            <div className="flex justify-between mb-1">
 
-                                <span>
-                                  {monthNames[item.month]}
-                                </span>
+                              <span>
+                                {monthNames[item.month]}
+                              </span>
 
-                                <span className="font-bold">
-                                  {item.percentage}%
-                                </span>
-
-                              </div>
-
-                              <div className="w-full h-3 bg-gray-200 rounded-full">
-
-                                <div
-                                  className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
-                                  style={{
-                                    width: `${item.percentage}%`
-                                  }}
-                                />
-
-                                <p className="text-xs text-gray-500 mt-2">
-                                  🎯 {item.completed} dari {item.target}
-                                  target aktivitas tercapai
-                                </p>
-
-                              </div>
+                              <span className="font-bold">
+                                {item.percentage}%
+                              </span>
 
                             </div>
 
-                          ))}
+                            <div className="w-full h-3 bg-gray-200 rounded-full">
 
-                        </div>
+                              <div
+                                className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
+                                style={{
+                                  width: `${item.percentage}%`
+                                }}
+                              />
+
+                              <p className="text-xs text-gray-500 mt-2">
+                                🎯 {item.completed} dari {item.target}
+                                target aktivitas tercapai
+                              </p>
+
+                            </div>
+
+                          </div>
+
+                        ))}
 
                       </div>
 
@@ -1399,213 +1398,218 @@ export default function DailyChecksheetApp() {
                   </div>
 
                 </div>
+
+            </div>
+          </p>
+            </div>
+
+    </div>
+  )
+}
+
+{
+  activeTab === 'profile' && (
+    <div className="space-y-4">
+      <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <h2 className="text-3xl font-black text-gray-800">
+              Kelola Aktivitas
+            </h2>
+
+            <p className="text-sm text-gray-500 mt-2">
+              Kelola checklist custom sesuai kebutuhan
+            </p>
+          </div>
+
+          <div className="w-16 h-16 rounded-3xl bg-purple-100 shadow-lg flex items-center justify-center text-4xl">
+            ⚙️
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-100 rounded-[28px] p-5 shadow-lg mb-4">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-24 h-24 rounded-[24px] bg-white shadow-md flex items-center justify-center text-5xl">
+              ✏️
+            </div>
+
+            <div className="border-l border-yellow-200 pl-4">
+              <h3 className="text-2xl font-black text-gray-800">
+                Custom Judul Home
+              </h3>
+
+              <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+                Ganti tulisan utama pada menu Home
               </p>
             </div>
-
           </div>
-        )}
 
-        {activeTab === 'profile' && (
           <div className="space-y-4">
-            <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h2 className="text-3xl font-black text-gray-800">
-                    Kelola Aktivitas
-                  </h2>
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              placeholder="Contoh: Daily Muslim Tracker"
+              className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
+            />
 
-                  <p className="text-sm text-gray-500 mt-2">
-                    Kelola checklist custom sesuai kebutuhan
-                  </p>
+            <button
+              onClick={saveTitle}
+              className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded-2xl py-4 font-bold shadow-lg"
+            >
+              Simpan Judul
+            </button>
+          </div>
+        </div>
+
+        <div className="space-y-4 mt-6">
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-[28px] p-5 shadow-lg">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-4 flex-1">
+                <div className="w-24 h-24 rounded-[24px] bg-white shadow-md flex items-center justify-center text-5xl">
+                  ➕
                 </div>
 
-                <div className="w-16 h-16 rounded-3xl bg-purple-100 shadow-lg flex items-center justify-center text-4xl">
-                  ⚙️
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-100 rounded-[28px] p-5 shadow-lg mb-4">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-24 h-24 rounded-[24px] bg-white shadow-md flex items-center justify-center text-5xl">
-                    ✏️
-                  </div>
-
-                  <div className="border-l border-yellow-200 pl-4">
-                    <h3 className="text-2xl font-black text-gray-800">
-                      Custom Judul Home
-                    </h3>
-
-                    <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-                      Ganti tulisan utama pada menu Home
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <input
-                    type="text"
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                    placeholder="Contoh: Daily Muslim Tracker"
-                    className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
-                  />
-
-                  <button
-                    onClick={saveTitle}
-                    className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded-2xl py-4 font-bold shadow-lg"
-                  >
-                    Simpan Judul
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-4 mt-6">
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-[28px] p-5 shadow-lg">
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-4 flex-1">
-                      <div className="w-24 h-24 rounded-[24px] bg-white shadow-md flex items-center justify-center text-5xl">
-                        ➕
-                      </div>
-
-                      <div className="border-l border-green-200 pl-4">
-                        <h3 className="text-2xl font-black text-gray-800">
-                          Tambahkan Aktivitas
-                        </h3>
-
-                        <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-                          Buat checklist custom baru sesuai kebutuhan Anda
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 space-y-4">
-                    <input
-                      type="text"
-                      value={newActivity}
-                      onChange={(e) => setNewActivity(e.target.value)}
-                      placeholder="Contoh: Push Up"
-                      className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
-                    />
-
-                    <select
-                      value={activityCategory}
-                      onChange={(e) => setActivityCategory(e.target.value)}
-                      className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
-                    >
-                      <option value="ibadah">Menu Ibadah</option>
-                      <option value="kesehatan">Menu Kesehatan</option>
-                    </select>
-
-                    <button
-                      onClick={addActivity}
-                      className="w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-2xl py-4 font-bold shadow-lg"
-                    >
-                      Simpan Aktivitas
-                    </button>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-red-50 to-rose-50 border border-red-100 rounded-[28px] p-5 shadow-lg">
-                  <h3 className="text-2xl font-black text-gray-800 mb-4">
-                    Hapus Aktivitas
+                <div className="border-l border-green-200 pl-4">
+                  <h3 className="text-2xl font-black text-gray-800">
+                    Tambahkan Aktivitas
                   </h3>
 
-                  <select
-                    value={deleteCategory}
-                    onChange={(e) => setDeleteCategory(e.target.value)}
-                    className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none mb-4"
-                  >
-                    <option value="ibadah">Menu Ibadah</option>
-                    <option value="kesehatan">Menu Kesehatan</option>
-                  </select>
-
-                  <div className="space-y-3">
-                    {(deleteCategory === 'ibadah'
-                      ? [...ibadahActivities, ...customIbadah]
-                      : [...kesehatanActivities, ...customKesehatan]
-                    ).map((item, index) => (
-                      <div
-                        key={index}
-                        className="bg-white rounded-2xl p-4 flex justify-between items-center"
-                      >
-                        <span className="font-medium text-gray-800">
-                          {item}
-                        </span>
-
-                        <button
-                          onClick={() =>
-                            deleteActivity(deleteCategory, item)
-                          }
-                          className="text-red-500 text-xl"
-                        >
-                          🗑️
-                        </button>
-                      </div>
-                    ))}
-
-                    {((deleteCategory === 'ibadah'
-                      ? [...ibadahActivities, ...customIbadah].length
-                      : [...kesehatanActivities, ...customKesehatan].length) === 0) && (
-                        <div className="bg-white rounded-2xl p-5 text-center text-gray-400 text-sm">
-                          Belum ada aktivitas custom
-                        </div>
-                      )}
-                  </div>
+                  <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+                    Buat checklist custom baru sesuai kebutuhan Anda
+                  </p>
                 </div>
               </div>
             </div>
+
+            <div className="mt-5 space-y-4">
+              <input
+                type="text"
+                value={newActivity}
+                onChange={(e) => setNewActivity(e.target.value)}
+                placeholder="Contoh: Push Up"
+                className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
+              />
+
+              <select
+                value={activityCategory}
+                onChange={(e) => setActivityCategory(e.target.value)}
+                className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
+              >
+                <option value="ibadah">Menu Ibadah</option>
+                <option value="kesehatan">Menu Kesehatan</option>
+              </select>
+
+              <button
+                onClick={addActivity}
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-2xl py-4 font-bold shadow-lg"
+              >
+                Simpan Aktivitas
+              </button>
+            </div>
           </div>
-        )}
-      </div>
 
-      <div className="fixed bottom-0 left-0 right-0 p-4">
-        <div className="max-w-md mx-auto bg-white rounded-[28px] shadow-2xl border border-gray-100 px-6 py-4 flex justify-around items-center">
-          <button
-            onClick={() => setActiveTab('home')}
-            className={`flex flex-col items-center text-xs transition-all ${activeTab === 'home'
-              ? 'text-green-700 scale-105 font-bold'
-              : 'text-gray-500'
-              }`}
-          >
-            <span className="text-2xl">🏠</span>
-            Home
-          </button>
+          <div className="bg-gradient-to-r from-red-50 to-rose-50 border border-red-100 rounded-[28px] p-5 shadow-lg">
+            <h3 className="text-2xl font-black text-gray-800 mb-4">
+              Hapus Aktivitas
+            </h3>
 
-          <button
-            onClick={() => setActiveTab('statistik')}
-            className={`flex flex-col items-center text-xs transition-all ${activeTab === 'statistik'
-              ? 'text-green-700 scale-105 font-bold'
-              : 'text-gray-500'
-              }`}
-          >
-            <span className="text-2xl">📈</span>
-            Statistik
-          </button>
+            <select
+              value={deleteCategory}
+              onChange={(e) => setDeleteCategory(e.target.value)}
+              className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none mb-4"
+            >
+              <option value="ibadah">Menu Ibadah</option>
+              <option value="kesehatan">Menu Kesehatan</option>
+            </select>
 
-          <button
-            onClick={() => setActiveTab('evaluasi')}
-            className={`flex flex-col items-center text-xs transition-all ${activeTab === 'evaluasi'
-              ? 'text-green-700 scale-105 font-bold'
-              : 'text-gray-500'
-              }`}
-          >
-            <span className="text-2xl">📋</span>
-            Evaluasi
-          </button>
+            <div className="space-y-3">
+              {(deleteCategory === 'ibadah'
+                ? [...ibadahActivities, ...customIbadah]
+                : [...kesehatanActivities, ...customKesehatan]
+              ).map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-4 flex justify-between items-center"
+                >
+                  <span className="font-medium text-gray-800">
+                    {item}
+                  </span>
 
-          <button
-            onClick={() => setActiveTab('profile')}
-            className={`flex flex-col items-center text-xs transition-all ${activeTab === 'profile'
-              ? 'text-green-700 scale-105 font-bold'
-              : 'text-gray-500'
-              }`}
-          >
-            <span className="text-2xl">👤</span>
-            Profile
-          </button>
+                  <button
+                    onClick={() =>
+                      deleteActivity(deleteCategory, item)
+                    }
+                    className="text-red-500 text-xl"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              ))}
+
+              {((deleteCategory === 'ibadah'
+                ? [...ibadahActivities, ...customIbadah].length
+                : [...kesehatanActivities, ...customKesehatan].length) === 0) && (
+                  <div className="bg-white rounded-2xl p-5 text-center text-gray-400 text-sm">
+                    Belum ada aktivitas custom
+                  </div>
+                )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  )
+}
+      </div >
+
+  <div className="fixed bottom-0 left-0 right-0 p-4">
+    <div className="max-w-md mx-auto bg-white rounded-[28px] shadow-2xl border border-gray-100 px-6 py-4 flex justify-around items-center">
+      <button
+        onClick={() => setActiveTab('home')}
+        className={`flex flex-col items-center text-xs transition-all ${activeTab === 'home'
+          ? 'text-green-700 scale-105 font-bold'
+          : 'text-gray-500'
+          }`}
+      >
+        <span className="text-2xl">🏠</span>
+        Home
+      </button>
+
+      <button
+        onClick={() => setActiveTab('statistik')}
+        className={`flex flex-col items-center text-xs transition-all ${activeTab === 'statistik'
+          ? 'text-green-700 scale-105 font-bold'
+          : 'text-gray-500'
+          }`}
+      >
+        <span className="text-2xl">📈</span>
+        Statistik
+      </button>
+
+      <button
+        onClick={() => setActiveTab('evaluasi')}
+        className={`flex flex-col items-center text-xs transition-all ${activeTab === 'evaluasi'
+          ? 'text-green-700 scale-105 font-bold'
+          : 'text-gray-500'
+          }`}
+      >
+        <span className="text-2xl">📋</span>
+        Evaluasi
+      </button>
+
+      <button
+        onClick={() => setActiveTab('profile')}
+        className={`flex flex-col items-center text-xs transition-all ${activeTab === 'profile'
+          ? 'text-green-700 scale-105 font-bold'
+          : 'text-gray-500'
+          }`}
+      >
+        <span className="text-2xl">👤</span>
+        Profile
+      </button>
+    </div>
+  </div>
+    </div >
   );
 }
