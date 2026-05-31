@@ -1168,7 +1168,7 @@ export default function DailyChecksheetApp() {
 
             <div className="bg-white rounded-[32px] p-6 shadow-xl">
               <p className="text-center text-gray-500">
-                <div className="overflow-auto max-h-[70vh]">
+                <div className="overflow-auto max-h-[500px]">
 
                   <table className="min-w-full text-xs border-collapse">
 
@@ -1289,7 +1289,7 @@ export default function DailyChecksheetApp() {
 
                   </table>
 
-                  <div className="overflow-auto max-h-[70vh]">
+                  <div className="overflow-auto max-h-[500px]">
 
                     <table>
                     </table>
