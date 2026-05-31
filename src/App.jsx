@@ -785,7 +785,7 @@ export default function DailyChecksheetApp() {
 
                   <div>
                     <p className="font-semibold text-gray-800">
-                      {item || "⚠️ KOSONG"}
+                      [{index}] {JSON.stringify(item)}
                     </p>
 
                     <p className="text-xs text-gray-400 mt-1">
