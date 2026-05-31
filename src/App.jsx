@@ -252,45 +252,53 @@ export default function DailyChecksheetApp() {
 
   const getMonthlyTrend = () => {
 
-    const currentMonth =
-      new Date().getMonth();
+    const currentYear =
+      new Date().getFullYear();
 
     const trends = [];
 
     for (
       let month = 0;
-      month <= currentMonth;
+      month <= new Date().getMonth();
       month++
     ) {
 
-      const monthActivities =
+      const monthData =
         historyData.filter((item) => {
 
-          const itemDate =
+          const d =
             new Date(item.date);
 
           return (
-            itemDate.getMonth() === month &&
-            itemDate.getFullYear() ===
-            new Date().getFullYear()
+            d.getMonth() === month &&
+            d.getFullYear() === currentYear
           );
         });
 
-      const percentage = Math.round(
-        (
-          monthActivities.length /
+      const daysInMonth =
+        new Date(
+          currentYear,
+          month + 1,
+          0
+        ).getDate();
+
+      const totalTarget =
+        allActivities.length *
+        daysInMonth;
+
+      const percentage =
+        Math.round(
           (
-            (
-              allActivities.length *
-              new Date(
-                new Date().getFullYear(),
-                month + 1,
-                0
-              ).getDate()
-            ) || 1
-          )
-        ) * 100
-      );
+            monthData.length /
+            (totalTarget || 1)
+          ) * 100
+        );
+
+      if (
+        monthData.length === 0
+      ) {
+        continue;
+      }
 
       trends.push({
         month,
