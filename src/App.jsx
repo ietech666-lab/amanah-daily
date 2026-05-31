@@ -1167,17 +1167,15 @@ export default function DailyChecksheetApp() {
             </div>
 
             <div className="bg-white rounded-[32px] p-6 shadow-xl">
-              <p className="text-center text-gray-500">
-                <div className="overflow-auto max-h-[500px]">
+              <div className="overflow-auto max-h-[500px] rounded-xl border">
+                <table className="min-w-full text-xs border-collapse">
 
-                  <table className="min-w-full text-xs border-collapse">
+                  <thead>
 
-                    <thead>
+                    <tr>
 
-                      <tr>
-
-                        <th
-                          className="
+                      <th
+                        className="
                             sticky
                             top-0
                             left-0
@@ -1189,14 +1187,14 @@ export default function DailyChecksheetApp() {
                             border-b
                             shadow-sm
                           "
-                        >
-                          Aktivitas
-                        </th>
+                      >
+                        Aktivitas
+                      </th>
 
-                        {monthDays.map((day) => (
-                          <th
-                            key={day}
-                            className="
+                      {monthDays.map((day) => (
+                        <th
+                          key={day}
+                          className="
                               sticky
                               top-0
                               z-10
@@ -1207,30 +1205,30 @@ export default function DailyChecksheetApp() {
                               min-w-[36px]
                               border-b
                             "
-                          >
-                            {day}
-                          </th>
-                        ))}
-
-                        <th className="p-3 text-center font-bold">
-                          %
-                        </th>
-
-                      </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                      {filteredActivities.map((activity) => (
-
-                        <tr
-                          key={activity}
-                          className="border-t hover:bg-slate-50"
                         >
+                          {day}
+                        </th>
+                      ))}
 
-                          <td
-                            className="
+                      <th className="p-3 text-center font-bold">
+                        %
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                    {filteredActivities.map((activity) => (
+
+                      <tr
+                        key={activity}
+                        className="border-t hover:bg-slate-50"
+                      >
+
+                        <td
+                          className="
                               sticky
                               left-0
                               z-20
@@ -1241,169 +1239,163 @@ export default function DailyChecksheetApp() {
                               border-r
                               shadow-sm
                             "
+                        >
+                          {activity}
+                        </td>
+
+                        {monthDays.map((day) => (
+
+                          <td
+                            key={day}
+                            className="text-center p-2"
                           >
-                            {activity}
+                            {getActivityStatus(
+                              activity,
+                              day
+                            ) === "done" ? (
+                              <div className="w-5 h-5 mx-auto rounded bg-emerald-500"></div>
+                            ) : getActivityStatus(
+                              activity,
+                              day
+                            ) === "future" ? (
+                              <div className="w-5 h-5 mx-auto rounded bg-slate-200"></div>
+                            ) : (
+                              <div className="w-5 h-5 mx-auto rounded bg-rose-500"></div>
+                            )}
                           </td>
-
-                          {monthDays.map((day) => (
-
-                            <td
-                              key={day}
-                              className="text-center p-2"
-                            >
-                              {getActivityStatus(
-                                activity,
-                                day
-                              ) === "done" ? (
-                                <div className="w-5 h-5 mx-auto rounded bg-emerald-500"></div>
-                              ) : getActivityStatus(
-                                activity,
-                                day
-                              ) === "future" ? (
-                                <div className="w-5 h-5 mx-auto rounded bg-slate-200"></div>
-                              ) : (
-                                <div className="w-5 h-5 mx-auto rounded bg-rose-500"></div>
-                              )}
-                            </td>
-
-                          ))}
-
-                          <td className="text-center font-bold text-slate-600">
-                            <span
-                              className={`font-bold ${getActivityPercentage(activity) >= 80
-                                ? "text-green-600"
-                                : getActivityPercentage(activity) >= 50
-                                  ? "text-yellow-500"
-                                  : "text-red-500"
-                                }`}
-                            >
-                              {getActivityPercentage(activity)}%
-                            </span>
-                          </td>
-
-                        </tr>
-
-                      ))}
-
-                    </tbody>
-
-                  </table>
-
-                  <div className="overflow-auto max-h-[500px]">
-
-                    <table>
-                    </table>
-
-                  </div>   {/* tutup overflow-auto */}
-                </div>   {/* tutup overflow-auto */}
-
-                {/* TEMPAT AI INSIGHT */}
-
-                <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
-
-                  <h2 className="text-xl font-bold mb-4">
-                    🤖 AI Insight Bulan Ini
-                  </h2>
-
-                  <div className="space-y-3">
-
-                    <div className="bg-blue-50 p-3 rounded-xl">
-                      <p className="font-bold text-blue-700">
-                        📈 Konsistensi Keseluruhan
-                      </p>
-                      <p>{Math.round(
-                        (
-                          (monthlyStats.ibadahDone +
-                            monthlyStats.kesehatanDone) /
-                          (monthlyTotalActivities || 1)
-                        ) * 100
-                      )}%</p>
-                    </div>
-
-                    <div className="bg-green-50 p-3 rounded-xl">
-                      <p className="font-bold text-green-700">
-                        🏆 Aktivitas Terbaik
-                      </p>
-                      <p>
-                        {aiResult.best}
-                      </p>
-                    </div>
-
-                    <div className="bg-red-50 p-3 rounded-xl">
-                      <p className="font-bold text-red-700">
-                        ⚠️ Aktivitas Terlemah
-                      </p>
-                      <p>
-                        {aiResult.weak}
-                      </p>
-                    </div>
-
-                    <div className="bg-yellow-50 p-3 rounded-xl">
-                      <p className="font-bold text-yellow-700">
-                        🎯 Target Bulan Depan
-                      </p>
-                      <p>
-                        Tingkatkan konsistensi menjadi{" "}
-                        {aiResult.target}
-                      </p>
-                    </div>
-
-                    <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
-
-                      <h2 className="text-xl font-bold mb-4">
-                        📈 Trend Konsistensi
-                      </h2>
-
-                      <div className="space-y-3">
-                        {monthlyTrend.map((item) => (
-
-                          <div key={item.month}>
-
-                            <div className="flex justify-between mb-1">
-
-                              <span>
-                                {monthNames[item.month]}
-                              </span>
-
-                              <span className="font-bold">
-                                {item.percentage}%
-                              </span>
-
-                            </div>
-
-                            <div className="w-full h-3 bg-gray-200 rounded-full">
-
-                              <div
-                                className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
-                                style={{
-                                  width: `${item.percentage}%`
-                                }}
-                              />
-
-                              <p className="text-xs text-gray-500 mt-2">
-                                🎯 {item.completed} dari {item.target}
-                                target aktivitas tercapai
-                              </p>
-
-                            </div>
-
-                          </div>
 
                         ))}
+
+                        <td className="text-center font-bold text-slate-600">
+                          <span
+                            className={`font-bold ${getActivityPercentage(activity) >= 80
+                              ? "text-green-600"
+                              : getActivityPercentage(activity) >= 50
+                                ? "text-yellow-500"
+                                : "text-red-500"
+                              }`}
+                          >
+                            {getActivityPercentage(activity)}%
+                          </span>
+                        </td>
+
+                      </tr>
+
+                    ))}
+
+                  </tbody>
+
+                </table>
+              </div>   {/* tutup overflow-auto */}
+
+              {/* TEMPAT AI INSIGHT */}
+
+              <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+
+                <h2 className="text-xl font-bold mb-4">
+                  🤖 AI Insight Bulan Ini
+                </h2>
+
+                <div className="space-y-3">
+
+                  <div className="bg-blue-50 p-3 rounded-xl">
+                    <p className="font-bold text-blue-700">
+                      📈 Konsistensi Keseluruhan
+                    </p>
+                    <p>{Math.round(
+                      (
+                        (monthlyStats.ibadahDone +
+                          monthlyStats.kesehatanDone) /
+                        (monthlyTotalActivities || 1)
+                      ) * 100
+                    )}%</p>
+                  </div>
+
+                  <div className="bg-green-50 p-3 rounded-xl">
+                    <p className="font-bold text-green-700">
+                      🏆 Aktivitas Terbaik
+                    </p>
+                    <p>
+                      {aiResult.best}
+                    </p>
+                  </div>
+
+                  <div className="bg-red-50 p-3 rounded-xl">
+                    <p className="font-bold text-red-700">
+                      ⚠️ Aktivitas Terlemah
+                    </p>
+                    <p>
+                      {aiResult.weak}
+                    </p>
+                  </div>
+
+                  <div className="bg-yellow-50 p-3 rounded-xl">
+                    <p className="font-bold text-yellow-700">
+                      🎯 Target Bulan Depan
+                    </p>
+                    <p>
+                      Tingkatkan konsistensi menjadi{" "}
+                      {aiResult.target}
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+
+                <h2 className="text-xl font-bold mb-4">
+                  📈 Trend Konsistensi
+                </h2>
+
+                <div className="space-y-3">
+                  {monthlyTrend.map((item) => (
+
+                    <div key={item.month}>
+
+                      <div className="flex justify-between mb-1">
+
+                        <span>
+                          {monthNames[item.month]}
+                        </span>
+
+                        <span className="font-bold">
+                          {item.percentage}%
+                        </span>
+
+                      </div>
+
+                      <div className="w-full h-3 bg-gray-200 rounded-full">
+
+                        <div
+                          className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
+                          style={{
+                            width: `${item.percentage}%`
+                          }}
+                        />
+
+                        <p className="text-xs text-gray-500 mt-2">
+                          🎯 {item.completed} dari {item.target}
+                          target aktivitas tercapai
+                        </p>
 
                       </div>
 
                     </div>
 
-                  </div>
+                  ))}
 
                 </div>
 
-            </div>
-          </p>
+              </div>
+
             </div>
 
+          </div>
+          </p>
     </div>
+
+    </div >
   )
 }
 
