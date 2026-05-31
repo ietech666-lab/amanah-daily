@@ -90,8 +90,9 @@ export default function DailyChecksheetApp() {
 
   const currentActivities =
     selectedMenu === 'ibadah'
-      ? [...ibadahActivities, ...customIbadah]
-      : [...kesehatanActivities, ...customKesehatan];
+      ? customIbadah
+      : customKesehatan;
+
   const ibadahTotal =
     ibadahActivities.length + customIbadah.length;
 
