@@ -450,6 +450,14 @@ export default function DailyChecksheetApp() {
 
     const snapshot = await getDocs(q);
 
+    console.log(
+      "HAPUS",
+      item,
+      category,
+      "JUMLAH:",
+      snapshot.size
+    );
+
     snapshot.forEach(async (document) => {
       await deleteDoc(
         doc(
