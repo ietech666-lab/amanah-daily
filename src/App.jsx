@@ -458,8 +458,8 @@ export default function DailyChecksheetApp() {
   const moveActivity = (direction, index) => {
     const list =
       selectedMenu === 'ibadah'
-        ? [...ibadahActivities]
-        : [...kesehatanActivities];
+        ? [...customIbadah]
+        : [...customKesehatan];
 
     if (direction === 'up' && index > 0) {
       [list[index], list[index - 1]] = [
@@ -479,9 +479,9 @@ export default function DailyChecksheetApp() {
     }
 
     if (selectedMenu === 'ibadah') {
-      setIbadahActivities(list);
+      setCustomIbadah(list);
     } else {
-      setKesehatanActivities(list);
+      setCustomKesehatan(list);
     }
 
     console.log("HASIL PINDAH:", list);
