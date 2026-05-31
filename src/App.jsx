@@ -788,6 +788,19 @@ export default function DailyChecksheetApp() {
             </div>
 
             {currentActivities.map((item, index) => (
+
+              console.log(
+                "RENDER ITEM:",
+                index,
+                item,
+                typeof item
+              );
+
+            return (
+            <div
+              key={`${item}-${index}`}
+            >
+
               <div
                 key={`${item}-${index}`}
                 className={`rounded-[24px] p-5 flex items-center justify-between border transition-all hover:shadow-lg ${completedActivities.includes(item)
@@ -833,309 +846,308 @@ export default function DailyChecksheetApp() {
                   {completedActivities.includes(item) ? '✓' : ''}
                 </button>
               </div>
-            ))}
-          </div>
+            </div>
         )}
 
-        {activeTab === 'statistik' && (
-          <div className="space-y-5">
-            <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-3xl font-black text-gray-800">
-                    Statistik Harian
+            {activeTab === 'statistik' && (
+              <div className="space-y-5">
+                <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h2 className="text-3xl font-black text-gray-800">
+                        Statistik Harian
+                      </h2>
+
+                      <p className="text-sm text-gray-500 mt-1">
+                        Ringkasan aktivitas hari ini
+                      </p>
+                    </div>
+
+                    <div className="text-4xl">☀️</div>
+                  </div>
+
+                  <div className="space-y-5">
+                    {[
+                      {
+                        title: 'Ibadah',
+                        total: `${ibadahTotal} Aktivitas`,
+                        done: `${ibadahDone} Aktivitas`,
+                        notDone: `${ibadahNotDone} Aktivitas`,
+                        value: `${ibadahPercent}%`,
+                      },
+                      {
+                        title: 'Kesehatan',
+                        total: `${kesehatanTotal} Aktivitas`,
+                        done: `${kesehatanDone} Aktivitas`,
+                        notDone: `${kesehatanNotDone} Aktivitas`,
+                        value: `${kesehatanPercent}%`,
+                      },
+                    ].map((item, index) => (
+                      <div key={index}>
+                        <div className="flex justify-between mb-2">
+                          <div>
+                            <p className="font-bold text-gray-800">
+                              {item.title}
+                            </p>
+
+                            <div className="space-y-2 mt-2 text-xs">
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Total Aktivitas
+                                </span>
+                                <span className="font-semibold text-gray-700">
+                                  {item.total}
+                                </span>
+                              </div>
+
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Dilakukan
+                                </span>
+                                <span className="font-semibold text-green-600">
+                                  {item.done}
+                                </span>
+                              </div>
+
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Tidak Dilakukan
+                                </span>
+                                <span className="font-semibold text-red-500">
+                                  {item.notDone}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <span className="text-green-700 font-bold">
+                            {item.value}
+                          </span>
+                        </div>
+
+                        <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                          <div
+                            className="bg-gradient-to-r from-green-500 to-emerald-400 h-3 rounded-full"
+                            style={{ width: item.value }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h2 className="text-3xl font-black text-gray-800">
+                        Statistik Mingguan
+                      </h2>
+
+                      <p className="text-sm text-gray-500 mt-1">
+                        Konsistensi aktivitas selama 7 hari
+                      </p>
+                    </div>
+
+                    <div className="text-4xl">📈</div>
+                  </div>
+
+                  <div className="space-y-5">
+                    {[
+                      {
+                        title: 'Ibadah',
+                        total: `${ibadahTotal * 7} Aktivitas`,
+                        done: `${weeklyStats.ibadahDone} Aktivitas`,
+                        notDone: `${ibadahTotal * 7 -
+                          weeklyStats.ibadahDone
+                          } Aktivitas`,
+                        value: `${Math.round(
+                          (weeklyStats.ibadahDone /
+                            (ibadahTotal * 7 || 1)) *
+                          100
+                        )}%`,
+                      },
+                      {
+                        title: 'Kesehatan',
+                        total: `${kesehatanTotal * 7} Aktivitas`,
+                        done: `${weeklyStats.kesehatanDone} Aktivitas`,
+                        notDone: `${kesehatanTotal * 7 -
+                          weeklyStats.kesehatanDone
+                          } Aktivitas`,
+                        value: `${Math.round(
+                          (weeklyStats.kesehatanDone /
+                            (kesehatanTotal * 7 || 1)) *
+                          100
+                        )}%`,
+                      },
+                    ].map((item, index) => (
+                      <div key={index}>
+                        <div className="flex justify-between mb-2">
+                          <div>
+                            <p className="font-bold text-gray-800">
+                              {item.title}
+                            </p>
+
+                            <div className="space-y-2 mt-2 text-xs">
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Total Aktivitas
+                                </span>
+                                <span className="font-semibold text-gray-700">
+                                  {item.total}
+                                </span>
+                              </div>
+
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Dilakukan
+                                </span>
+                                <span className="font-semibold text-green-600">
+                                  {item.done}
+                                </span>
+                              </div>
+
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Tidak Dilakukan
+                                </span>
+                                <span className="font-semibold text-red-500">
+                                  {item.notDone}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <span className="text-green-700 font-bold">
+                            {item.value}
+                          </span>
+                        </div>
+
+                        <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                          <div
+                            className="bg-gradient-to-r from-green-500 to-emerald-400 h-3 rounded-full"
+                            style={{ width: item.value }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h2 className="text-3xl font-black text-gray-800">
+                        Statistik Bulanan
+                      </h2>
+                    </div>
+
+                    <div className="text-4xl">🗓️</div>
+                  </div>
+
+                  <div className="space-y-5">
+                    {[
+                      {
+                        title: 'Ibadah',
+                        total: `${ibadahTotal * daysInMonth} Aktivitas`,
+                        done: `${monthlyStats.ibadahDone} Aktivitas`,
+                        notDone: `${ibadahTotal * daysInMonth -
+                          monthlyStats.ibadahDone
+                          } Aktivitas`,
+                        value: `${Math.round(
+                          (monthlyStats.ibadahDone /
+                            (ibadahTotal * daysInMonth || 1)) *
+                          100
+                        )}%`,
+                      },
+                      {
+                        title: 'Kesehatan',
+                        total: `${kesehatanTotal * daysInMonth} Aktivitas`,
+                        done: `${monthlyStats.kesehatanDone} Aktivitas`,
+                        notDone: `${kesehatanTotal * daysInMonth -
+                          monthlyStats.kesehatanDone
+                          } Aktivitas`,
+                        value: `${Math.round(
+                          (monthlyStats.kesehatanDone /
+                            (kesehatanTotal * daysInMonth || 1)) *
+                          100
+                        )}%`,
+                      },
+                    ].map((item, index) => (
+                      <div key={index}>
+                        <div className="flex justify-between mb-2">
+                          <div>
+                            <p className="font-bold text-gray-800">
+                              {item.title}
+                            </p>
+
+                            <div className="space-y-2 mt-2 text-xs">
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Total Aktivitas
+                                </span>
+                                <span className="font-semibold text-gray-700">
+                                  {item.total}
+                                </span>
+                              </div>
+
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Dilakukan
+                                </span>
+                                <span className="font-semibold text-green-600">
+                                  {item.done}
+                                </span>
+                              </div>
+
+                              <div className="flex justify-between gap-4">
+                                <span className="text-gray-400">
+                                  Tidak Dilakukan
+                                </span>
+                                <span className="font-semibold text-red-500">
+                                  {item.notDone}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <span className="text-green-700 font-bold">
+                            {item.value}
+                          </span>
+                        </div>
+
+                        <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                          <div
+                            className="bg-gradient-to-r from-green-500 to-emerald-400 h-3 rounded-full"
+                            style={{ width: item.value }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'evaluasi' && (
+              <div className="space-y-5">
+
+                <div className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-[32px] p-6 shadow-xl">
+                  <h2 className="text-3xl font-black">
+                    📋 Evaluasi Aktivitas
                   </h2>
 
-                  <p className="text-sm text-gray-500 mt-1">
-                    Ringkasan aktivitas hari ini
+                  <p className="mt-2 text-sm opacity-90">
+                    Monitoring dan evaluasi aktivitas bulanan
                   </p>
                 </div>
 
-                <div className="text-4xl">☀️</div>
-              </div>
-
-              <div className="space-y-5">
-                {[
-                  {
-                    title: 'Ibadah',
-                    total: `${ibadahTotal} Aktivitas`,
-                    done: `${ibadahDone} Aktivitas`,
-                    notDone: `${ibadahNotDone} Aktivitas`,
-                    value: `${ibadahPercent}%`,
-                  },
-                  {
-                    title: 'Kesehatan',
-                    total: `${kesehatanTotal} Aktivitas`,
-                    done: `${kesehatanDone} Aktivitas`,
-                    notDone: `${kesehatanNotDone} Aktivitas`,
-                    value: `${kesehatanPercent}%`,
-                  },
-                ].map((item, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between mb-2">
-                      <div>
-                        <p className="font-bold text-gray-800">
-                          {item.title}
-                        </p>
-
-                        <div className="space-y-2 mt-2 text-xs">
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Total Aktivitas
-                            </span>
-                            <span className="font-semibold text-gray-700">
-                              {item.total}
-                            </span>
-                          </div>
-
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Dilakukan
-                            </span>
-                            <span className="font-semibold text-green-600">
-                              {item.done}
-                            </span>
-                          </div>
-
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Tidak Dilakukan
-                            </span>
-                            <span className="font-semibold text-red-500">
-                              {item.notDone}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <span className="text-green-700 font-bold">
-                        {item.value}
-                      </span>
-                    </div>
-
-                    <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-                      <div
-                        className="bg-gradient-to-r from-green-500 to-emerald-400 h-3 rounded-full"
-                        style={{ width: item.value }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-3xl font-black text-gray-800">
-                    Statistik Mingguan
-                  </h2>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Konsistensi aktivitas selama 7 hari
-                  </p>
-                </div>
-
-                <div className="text-4xl">📈</div>
-              </div>
-
-              <div className="space-y-5">
-                {[
-                  {
-                    title: 'Ibadah',
-                    total: `${ibadahTotal * 7} Aktivitas`,
-                    done: `${weeklyStats.ibadahDone} Aktivitas`,
-                    notDone: `${ibadahTotal * 7 -
-                      weeklyStats.ibadahDone
-                      } Aktivitas`,
-                    value: `${Math.round(
-                      (weeklyStats.ibadahDone /
-                        (ibadahTotal * 7 || 1)) *
-                      100
-                    )}%`,
-                  },
-                  {
-                    title: 'Kesehatan',
-                    total: `${kesehatanTotal * 7} Aktivitas`,
-                    done: `${weeklyStats.kesehatanDone} Aktivitas`,
-                    notDone: `${kesehatanTotal * 7 -
-                      weeklyStats.kesehatanDone
-                      } Aktivitas`,
-                    value: `${Math.round(
-                      (weeklyStats.kesehatanDone /
-                        (kesehatanTotal * 7 || 1)) *
-                      100
-                    )}%`,
-                  },
-                ].map((item, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between mb-2">
-                      <div>
-                        <p className="font-bold text-gray-800">
-                          {item.title}
-                        </p>
-
-                        <div className="space-y-2 mt-2 text-xs">
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Total Aktivitas
-                            </span>
-                            <span className="font-semibold text-gray-700">
-                              {item.total}
-                            </span>
-                          </div>
-
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Dilakukan
-                            </span>
-                            <span className="font-semibold text-green-600">
-                              {item.done}
-                            </span>
-                          </div>
-
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Tidak Dilakukan
-                            </span>
-                            <span className="font-semibold text-red-500">
-                              {item.notDone}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <span className="text-green-700 font-bold">
-                        {item.value}
-                      </span>
-                    </div>
-
-                    <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-                      <div
-                        className="bg-gradient-to-r from-green-500 to-emerald-400 h-3 rounded-full"
-                        style={{ width: item.value }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-3xl font-black text-gray-800">
-                    Statistik Bulanan
-                  </h2>
-                </div>
-
-                <div className="text-4xl">🗓️</div>
-              </div>
-
-              <div className="space-y-5">
-                {[
-                  {
-                    title: 'Ibadah',
-                    total: `${ibadahTotal * daysInMonth} Aktivitas`,
-                    done: `${monthlyStats.ibadahDone} Aktivitas`,
-                    notDone: `${ibadahTotal * daysInMonth -
-                      monthlyStats.ibadahDone
-                      } Aktivitas`,
-                    value: `${Math.round(
-                      (monthlyStats.ibadahDone /
-                        (ibadahTotal * daysInMonth || 1)) *
-                      100
-                    )}%`,
-                  },
-                  {
-                    title: 'Kesehatan',
-                    total: `${kesehatanTotal * daysInMonth} Aktivitas`,
-                    done: `${monthlyStats.kesehatanDone} Aktivitas`,
-                    notDone: `${kesehatanTotal * daysInMonth -
-                      monthlyStats.kesehatanDone
-                      } Aktivitas`,
-                    value: `${Math.round(
-                      (monthlyStats.kesehatanDone /
-                        (kesehatanTotal * daysInMonth || 1)) *
-                      100
-                    )}%`,
-                  },
-                ].map((item, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between mb-2">
-                      <div>
-                        <p className="font-bold text-gray-800">
-                          {item.title}
-                        </p>
-
-                        <div className="space-y-2 mt-2 text-xs">
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Total Aktivitas
-                            </span>
-                            <span className="font-semibold text-gray-700">
-                              {item.total}
-                            </span>
-                          </div>
-
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Dilakukan
-                            </span>
-                            <span className="font-semibold text-green-600">
-                              {item.done}
-                            </span>
-                          </div>
-
-                          <div className="flex justify-between gap-4">
-                            <span className="text-gray-400">
-                              Tidak Dilakukan
-                            </span>
-                            <span className="font-semibold text-red-500">
-                              {item.notDone}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <span className="text-green-700 font-bold">
-                        {item.value}
-                      </span>
-                    </div>
-
-                    <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-                      <div
-                        className="bg-gradient-to-r from-green-500 to-emerald-400 h-3 rounded-full"
-                        style={{ width: item.value }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'evaluasi' && (
-          <div className="space-y-5">
-
-            <div className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-[32px] p-6 shadow-xl">
-              <h2 className="text-3xl font-black">
-                📋 Evaluasi Aktivitas
-              </h2>
-
-              <p className="mt-2 text-sm opacity-90">
-                Monitoring dan evaluasi aktivitas bulanan
-              </p>
-            </div>
-
-            <div className="mt-4">
-              <select
-                value={selectedMonth}
-                onChange={(e) =>
-                  setSelectedMonth(Number(e.target.value))
-                }
-                className="
+                <div className="mt-4">
+                  <select
+                    value={selectedMonth}
+                    onChange={(e) =>
+                      setSelectedMonth(Number(e.target.value))
+                    }
+                    className="
                   w-full
                   rounded-2xl
                   border
@@ -1144,70 +1156,70 @@ export default function DailyChecksheetApp() {
                   text-gray-700
                   font-medium
                 "
-              >
-                {monthNames.map((month, index) => (
-                  <option
-                    key={index}
-                    value={index}
                   >
-                    {month} {selectedYear}
-                  </option>
-                ))}
-              </select>
-            </div>
+                    {monthNames.map((month, index) => (
+                      <option
+                        key={index}
+                        value={index}
+                      >
+                        {month} {selectedYear}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-            <div className="bg-white rounded-[32px] p-4 shadow-xl">
-              <div className="flex gap-2">
+                <div className="bg-white rounded-[32px] p-4 shadow-xl">
+                  <div className="flex gap-2">
 
-                <button
-                  onClick={() =>
-                    setEvaluationFilter("all")
-                  }
-                  className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "all"
-                    ? "bg-green-600 text-white"
-                    : "bg-gray-100"
-                    }`}
-                >
-                  Semua
-                </button>
+                    <button
+                      onClick={() =>
+                        setEvaluationFilter("all")
+                      }
+                      className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "all"
+                        ? "bg-green-600 text-white"
+                        : "bg-gray-100"
+                        }`}
+                    >
+                      Semua
+                    </button>
 
-                <button
-                  onClick={() =>
-                    setEvaluationFilter("ibadah")
-                  }
-                  className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "ibadah"
-                    ? "bg-green-600 text-white"
-                    : "bg-gray-100"
-                    }`}
-                >
-                  Ibadah
-                </button>
+                    <button
+                      onClick={() =>
+                        setEvaluationFilter("ibadah")
+                      }
+                      className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "ibadah"
+                        ? "bg-green-600 text-white"
+                        : "bg-gray-100"
+                        }`}
+                    >
+                      Ibadah
+                    </button>
 
-                <button
-                  onClick={() =>
-                    setEvaluationFilter("kesehatan")
-                  }
-                  className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "kesehatan"
-                    ? "bg-green-600 text-white"
-                    : "bg-gray-100"
-                    }`}
-                >
-                  Kesehatan
-                </button>
+                    <button
+                      onClick={() =>
+                        setEvaluationFilter("kesehatan")
+                      }
+                      className={`flex-1 rounded-2xl py-3 font-semibold ${evaluationFilter === "kesehatan"
+                        ? "bg-green-600 text-white"
+                        : "bg-gray-100"
+                        }`}
+                    >
+                      Kesehatan
+                    </button>
 
-              </div>
-            </div>
+                  </div>
+                </div>
 
-            <div className="bg-white rounded-[32px] p-6 shadow-xl">
-              <div className="overflow-auto max-h-[500px] rounded-xl border">
-                <table className="min-w-full text-xs border-collapse">
+                <div className="bg-white rounded-[32px] p-6 shadow-xl">
+                  <div className="overflow-auto max-h-[500px] rounded-xl border">
+                    <table className="min-w-full text-xs border-collapse">
 
-                  <thead>
+                      <thead>
 
-                    <tr>
+                        <tr>
 
-                      <th
-                        className="
+                          <th
+                            className="
                             sticky
                             top-0
                             left-0
@@ -1219,14 +1231,14 @@ export default function DailyChecksheetApp() {
                             border-b
                             shadow-sm
                           "
-                      >
-                        Aktivitas
-                      </th>
+                          >
+                            Aktivitas
+                          </th>
 
-                      {monthDays.map((day) => (
-                        <th
-                          key={day}
-                          className="
+                          {monthDays.map((day) => (
+                            <th
+                              key={day}
+                              className="
                               sticky
                               top-0
                               z-10
@@ -1237,30 +1249,30 @@ export default function DailyChecksheetApp() {
                               min-w-[36px]
                               border-b
                             "
-                        >
-                          {day}
-                        </th>
-                      ))}
+                            >
+                              {day}
+                            </th>
+                          ))}
 
-                      <th className="p-3 text-center font-bold">
-                        %
-                      </th>
+                          <th className="p-3 text-center font-bold">
+                            %
+                          </th>
 
-                    </tr>
+                        </tr>
 
-                  </thead>
+                      </thead>
 
-                  <tbody>
+                      <tbody>
 
-                    {filteredActivities.map((activity) => (
+                        {filteredActivities.map((activity) => (
 
-                      <tr
-                        key={activity}
-                        className="border-t hover:bg-slate-50"
-                      >
+                          <tr
+                            key={activity}
+                            className="border-t hover:bg-slate-50"
+                          >
 
-                        <td
-                          className="
+                            <td
+                              className="
                               sticky
                               left-0
                               z-20
@@ -1271,321 +1283,321 @@ export default function DailyChecksheetApp() {
                               border-r
                               shadow-sm
                             "
-                        >
-                          {activity}
-                        </td>
+                            >
+                              {activity}
+                            </td>
 
-                        {monthDays.map((day) => (
+                            {monthDays.map((day) => (
 
-                          <td
-                            key={day}
-                            className="text-center p-2"
-                          >
-                            {getActivityStatus(
-                              activity,
-                              day
-                            ) === "done" ? (
-                              <div className="w-5 h-5 mx-auto rounded bg-emerald-500"></div>
-                            ) : getActivityStatus(
-                              activity,
-                              day
-                            ) === "future" ? (
-                              <div className="w-5 h-5 mx-auto rounded bg-slate-200"></div>
-                            ) : (
-                              <div className="w-5 h-5 mx-auto rounded bg-rose-500"></div>
-                            )}
-                          </td>
+                              <td
+                                key={day}
+                                className="text-center p-2"
+                              >
+                                {getActivityStatus(
+                                  activity,
+                                  day
+                                ) === "done" ? (
+                                  <div className="w-5 h-5 mx-auto rounded bg-emerald-500"></div>
+                                ) : getActivityStatus(
+                                  activity,
+                                  day
+                                ) === "future" ? (
+                                  <div className="w-5 h-5 mx-auto rounded bg-slate-200"></div>
+                                ) : (
+                                  <div className="w-5 h-5 mx-auto rounded bg-rose-500"></div>
+                                )}
+                              </td>
+
+                            ))}
+
+                            <td className="text-center font-bold text-slate-600">
+                              <span
+                                className={`font-bold ${getActivityPercentage(activity) >= 80
+                                  ? "text-green-600"
+                                  : getActivityPercentage(activity) >= 50
+                                    ? "text-yellow-500"
+                                    : "text-red-500"
+                                  }`}
+                              >
+                                {getActivityPercentage(activity)}%
+                              </span>
+                            </td>
+
+                          </tr>
 
                         ))}
 
-                        <td className="text-center font-bold text-slate-600">
-                          <span
-                            className={`font-bold ${getActivityPercentage(activity) >= 80
-                              ? "text-green-600"
-                              : getActivityPercentage(activity) >= 50
-                                ? "text-yellow-500"
-                                : "text-red-500"
-                              }`}
-                          >
-                            {getActivityPercentage(activity)}%
-                          </span>
-                        </td>
+                      </tbody>
 
-                      </tr>
+                    </table>
+                  </div>   {/* tutup overflow-auto */}
+                </div>
+
+                {/* TEMPAT AI INSIGHT */}
+
+                <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+
+                  <h2 className="text-xl font-bold mb-4">
+                    🤖 AI Insight Bulan Ini
+                  </h2>
+
+                  <div className="space-y-3">
+
+                    <div className="bg-blue-50 p-3 rounded-xl">
+                      <p className="font-bold text-blue-700">
+                        📈 Konsistensi Keseluruhan
+                      </p>
+                      <p>{Math.round(
+                        (
+                          (monthlyStats.ibadahDone +
+                            monthlyStats.kesehatanDone) /
+                          (monthlyTotalActivities || 1)
+                        ) * 100
+                      )}%</p>
+                    </div>
+
+                    <div className="bg-green-50 p-3 rounded-xl">
+                      <p className="font-bold text-green-700">
+                        🏆 Aktivitas Terbaik
+                      </p>
+                      <p>
+                        {aiResult.best}
+                      </p>
+                    </div>
+
+                    <div className="bg-red-50 p-3 rounded-xl">
+                      <p className="font-bold text-red-700">
+                        ⚠️ Aktivitas Terlemah
+                      </p>
+                      <p>
+                        {aiResult.weak}
+                      </p>
+                    </div>
+
+                    <div className="bg-indigo-50 p-3 rounded-xl">
+                      <p className="font-bold text-indigo-700">
+                        💡 Saran AI
+                      </p>
+
+                      <p>{aiResult.advice}</p>
+                    </div>
+
+                    <div className="bg-yellow-50 p-3 rounded-xl">
+                      <p className="font-bold text-yellow-700">
+                        🎯 Target Bulan Depan
+                      </p>
+                      <p>
+                        Tingkatkan konsistensi menjadi{" "}
+                        {aiResult.target}
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+
+                  <h2 className="text-xl font-bold mb-4">
+                    📈 Trend Konsistensi
+                  </h2>
+
+                  <div className="space-y-3">
+                    {monthlyTrend.map((item) => (
+
+                      <div key={item.month}>
+
+                        <div className="flex justify-between mb-1">
+
+                          <span>
+                            {monthNames[item.month]}
+                          </span>
+
+                          <span className="font-bold">
+                            {item.percentage}%
+                          </span>
+
+                        </div>
+
+                        <div className="w-full h-3 bg-gray-200 rounded-full">
+
+                          <div
+                            className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
+                            style={{
+                              width: `${item.percentage}%`
+                            }}
+                          />
+
+                        </div>
+
+                        <p className="text-xs text-gray-500 mt-2">
+                          🎯 {item.completed} dari {item.target}
+                          target aktivitas tercapai
+                        </p>
+
+                      </div>
 
                     ))}
 
-                  </tbody>
-
-                </table>
-              </div>   {/* tutup overflow-auto */}
-            </div>
-
-            {/* TEMPAT AI INSIGHT */}
-
-            <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
-
-              <h2 className="text-xl font-bold mb-4">
-                🤖 AI Insight Bulan Ini
-              </h2>
-
-              <div className="space-y-3">
-
-                <div className="bg-blue-50 p-3 rounded-xl">
-                  <p className="font-bold text-blue-700">
-                    📈 Konsistensi Keseluruhan
-                  </p>
-                  <p>{Math.round(
-                    (
-                      (monthlyStats.ibadahDone +
-                        monthlyStats.kesehatanDone) /
-                      (monthlyTotalActivities || 1)
-                    ) * 100
-                  )}%</p>
-                </div>
-
-                <div className="bg-green-50 p-3 rounded-xl">
-                  <p className="font-bold text-green-700">
-                    🏆 Aktivitas Terbaik
-                  </p>
-                  <p>
-                    {aiResult.best}
-                  </p>
-                </div>
-
-                <div className="bg-red-50 p-3 rounded-xl">
-                  <p className="font-bold text-red-700">
-                    ⚠️ Aktivitas Terlemah
-                  </p>
-                  <p>
-                    {aiResult.weak}
-                  </p>
-                </div>
-
-                <div className="bg-indigo-50 p-3 rounded-xl">
-                  <p className="font-bold text-indigo-700">
-                    💡 Saran AI
-                  </p>
-
-                  <p>{aiResult.advice}</p>
-                </div>
-
-                <div className="bg-yellow-50 p-3 rounded-xl">
-                  <p className="font-bold text-yellow-700">
-                    🎯 Target Bulan Depan
-                  </p>
-                  <p>
-                    Tingkatkan konsistensi menjadi{" "}
-                    {aiResult.target}
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-            <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
-
-              <h2 className="text-xl font-bold mb-4">
-                📈 Trend Konsistensi
-              </h2>
-
-              <div className="space-y-3">
-                {monthlyTrend.map((item) => (
-
-                  <div key={item.month}>
-
-                    <div className="flex justify-between mb-1">
-
-                      <span>
-                        {monthNames[item.month]}
-                      </span>
-
-                      <span className="font-bold">
-                        {item.percentage}%
-                      </span>
-
-                    </div>
-
-                    <div className="w-full h-3 bg-gray-200 rounded-full">
-
-                      <div
-                        className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
-                        style={{
-                          width: `${item.percentage}%`
-                        }}
-                      />
-
-                    </div>
-
-                    <p className="text-xs text-gray-500 mt-2">
-                      🎯 {item.completed} dari {item.target}
-                      target aktivitas tercapai
-                    </p>
-
                   </div>
-
-                ))}
-
+                </div>
               </div>
-            </div>
-          </div>
     </div>
 
     </div >
-  )
+      )
 }
 
-{
-  activeTab === 'profile' && (
-    <div className="space-y-4">
-      <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <h2 className="text-3xl font-black text-gray-800">
-              Kelola Aktivitas
-            </h2>
-
-            <p className="text-sm text-gray-500 mt-2">
-              Kelola checklist custom sesuai kebutuhan
-            </p>
-          </div>
-
-          <div className="w-16 h-16 rounded-3xl bg-purple-100 shadow-lg flex items-center justify-center text-4xl">
-            ⚙️
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-100 rounded-[28px] p-5 shadow-lg mb-4">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-24 h-24 rounded-[24px] bg-white shadow-md flex items-center justify-center text-5xl">
-              ✏️
-            </div>
-
-            <div className="border-l border-yellow-200 pl-4">
-              <h3 className="text-2xl font-black text-gray-800">
-                Custom Judul Home
-              </h3>
-
-              <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-                Ganti tulisan utama pada menu Home
-              </p>
-            </div>
-          </div>
-
+      {
+        activeTab === 'profile' && (
           <div className="space-y-4">
-            <input
-              type="text"
-              value={newTitle}
-              onChange={(e) => setNewTitle(e.target.value)}
-              placeholder="Contoh: Daily Muslim Tracker"
-              className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
-            />
+            <div className="bg-white rounded-[32px] p-6 shadow-xl border border-gray-100">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h2 className="text-3xl font-black text-gray-800">
+                    Kelola Aktivitas
+                  </h2>
 
-            <button
-              onClick={saveTitle}
-              className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded-2xl py-4 font-bold shadow-lg"
-            >
-              Simpan Judul
-            </button>
-          </div>
-        </div>
-
-        <div className="space-y-4 mt-6">
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-[28px] p-5 shadow-lg">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4 flex-1">
-                <div className="w-24 h-24 rounded-[24px] bg-white shadow-md flex items-center justify-center text-5xl">
-                  ➕
+                  <p className="text-sm text-gray-500 mt-2">
+                    Kelola checklist custom sesuai kebutuhan
+                  </p>
                 </div>
 
-                <div className="border-l border-green-200 pl-4">
-                  <h3 className="text-2xl font-black text-gray-800">
-                    Tambahkan Aktivitas
+                <div className="w-16 h-16 rounded-3xl bg-purple-100 shadow-lg flex items-center justify-center text-4xl">
+                  ⚙️
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-100 rounded-[28px] p-5 shadow-lg mb-4">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-24 h-24 rounded-[24px] bg-white shadow-md flex items-center justify-center text-5xl">
+                    ✏️
+                  </div>
+
+                  <div className="border-l border-yellow-200 pl-4">
+                    <h3 className="text-2xl font-black text-gray-800">
+                      Custom Judul Home
+                    </h3>
+
+                    <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+                      Ganti tulisan utama pada menu Home
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <input
+                    type="text"
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
+                    placeholder="Contoh: Daily Muslim Tracker"
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
+                  />
+
+                  <button
+                    onClick={saveTitle}
+                    className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded-2xl py-4 font-bold shadow-lg"
+                  >
+                    Simpan Judul
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-4 mt-6">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-[28px] p-5 shadow-lg">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4 flex-1">
+                      <div className="w-24 h-24 rounded-[24px] bg-white shadow-md flex items-center justify-center text-5xl">
+                        ➕
+                      </div>
+
+                      <div className="border-l border-green-200 pl-4">
+                        <h3 className="text-2xl font-black text-gray-800">
+                          Tambahkan Aktivitas
+                        </h3>
+
+                        <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+                          Buat checklist custom baru sesuai kebutuhan Anda
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-5 space-y-4">
+                    <input
+                      type="text"
+                      value={newActivity}
+                      onChange={(e) => setNewActivity(e.target.value)}
+                      placeholder="Contoh: Push Up"
+                      className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
+                    />
+
+                    <select
+                      value={activityCategory}
+                      onChange={(e) => setActivityCategory(e.target.value)}
+                      className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
+                    >
+                      <option value="ibadah">Menu Ibadah</option>
+                      <option value="kesehatan">Menu Kesehatan</option>
+                    </select>
+
+                    <button
+                      onClick={addActivity}
+                      className="w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-2xl py-4 font-bold shadow-lg"
+                    >
+                      Simpan Aktivitas
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-red-50 to-rose-50 border border-red-100 rounded-[28px] p-5 shadow-lg">
+                  <h3 className="text-2xl font-black text-gray-800 mb-4">
+                    Hapus Aktivitas
                   </h3>
 
-                  <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-                    Buat checklist custom baru sesuai kebutuhan Anda
-                  </p>
+                  <select
+                    value={deleteCategory}
+                    onChange={(e) => setDeleteCategory(e.target.value)}
+                    className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none mb-4"
+                  >
+                    <option value="ibadah">Menu Ibadah</option>
+                    <option value="kesehatan">Menu Kesehatan</option>
+                  </select>
+
+                  <div className="space-y-3">
+                    {(deleteCategory === 'ibadah'
+                      ? customIbadah
+                      : customKesehatan
+                    )
+                      < div
+                  key={index}
+                    className="bg-white rounded-2xl p-4 flex justify-between items-center"
+                >
+                    <span className="font-medium text-gray-800">
+                      {item}
+                    </span>
+
+                    <button
+                      onClick={() =>
+                        deleteActivity(deleteCategory, item)
+                      }
+                      className="text-red-500 text-xl"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+              ))}
+
+                  {((deleteCategory === 'ibadah'
+                    ? customIbadah.length
+                    : customKesehatan.length) === 0) && (
+                      <div className="bg-white rounded-2xl p-5 text-center text-gray-400 text-sm">
+                        Belum ada aktivitas custom
+                      </div>
+                    )}
                 </div>
               </div>
             </div>
-
-            <div className="mt-5 space-y-4">
-              <input
-                type="text"
-                value={newActivity}
-                onChange={(e) => setNewActivity(e.target.value)}
-                placeholder="Contoh: Push Up"
-                className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
-              />
-
-              <select
-                value={activityCategory}
-                onChange={(e) => setActivityCategory(e.target.value)}
-                className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none"
-              >
-                <option value="ibadah">Menu Ibadah</option>
-                <option value="kesehatan">Menu Kesehatan</option>
-              </select>
-
-              <button
-                onClick={addActivity}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-2xl py-4 font-bold shadow-lg"
-              >
-                Simpan Aktivitas
-              </button>
-            </div>
           </div>
-
-          <div className="bg-gradient-to-r from-red-50 to-rose-50 border border-red-100 rounded-[28px] p-5 shadow-lg">
-            <h3 className="text-2xl font-black text-gray-800 mb-4">
-              Hapus Aktivitas
-            </h3>
-
-            <select
-              value={deleteCategory}
-              onChange={(e) => setDeleteCategory(e.target.value)}
-              className="w-full rounded-2xl border border-gray-200 px-4 py-4 bg-white outline-none mb-4"
-            >
-              <option value="ibadah">Menu Ibadah</option>
-              <option value="kesehatan">Menu Kesehatan</option>
-            </select>
-
-            <div className="space-y-3">
-              {(deleteCategory === 'ibadah'
-                ? customIbadah
-                : customKesehatan
-              )
-                < div
-                  key={index}
-              className="bg-white rounded-2xl p-4 flex justify-between items-center"
-                >
-              <span className="font-medium text-gray-800">
-                {item}
-              </span>
-
-              <button
-                onClick={() =>
-                  deleteActivity(deleteCategory, item)
-                }
-                className="text-red-500 text-xl"
-              >
-                🗑️
-              </button>
-            </div>
-              ))}
-
-            {((deleteCategory === 'ibadah'
-              ? customIbadah.length
-              : customKesehatan.length) === 0) && (
-                <div className="bg-white rounded-2xl p-5 text-center text-gray-400 text-sm">
-                  Belum ada aktivitas custom
-                </div>
-              )}
-          </div>
-        </div>
-      </div>
-    </div>
     </div >
   )
 }
