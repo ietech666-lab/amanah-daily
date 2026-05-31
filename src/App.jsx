@@ -1329,6 +1329,14 @@ export default function DailyChecksheetApp() {
                     </p>
                   </div>
 
+                  <div className="bg-indigo-50 p-3 rounded-xl">
+                    <p className="font-bold text-indigo-700">
+                      💡 Saran AI
+                    </p>
+
+                    <p>{aiResult.advice}</p>
+                  </div>
+
                   <div className="bg-yellow-50 p-3 rounded-xl">
                     <p className="font-bold text-yellow-700">
                       🎯 Target Bulan Depan
@@ -1374,25 +1382,21 @@ export default function DailyChecksheetApp() {
                           }}
                         />
 
-                        <p className="text-xs text-gray-500 mt-2">
-                          🎯 {item.completed} dari {item.target}
-                          target aktivitas tercapai
-                        </p>
-
                       </div>
+
+                      <p className="text-xs text-gray-500 mt-2">
+                        🎯 {item.completed} dari {item.target}
+                        target aktivitas tercapai
+                      </p>
 
                     </div>
 
                   ))}
 
                 </div>
-
               </div>
-
             </div>
-
           </div>
-          </p>
     </div>
 
     </div >
