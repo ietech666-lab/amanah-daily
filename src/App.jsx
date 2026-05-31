@@ -539,6 +539,9 @@ export default function DailyChecksheetApp() {
       }
     });
 
+    console.log("IBADAH FIREBASE", ibadah);
+    console.log("KESEHATAN FIREBASE", kesehatan);
+
     setCustomIbadah(ibadah);
     setCustomKesehatan(kesehatan);
   };
