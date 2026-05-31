@@ -482,6 +482,8 @@ export default function DailyChecksheetApp() {
     } else {
       setKesehatanActivities(list);
     }
+
+    console.log("HASIL PINDAH:", list);
   };
 
   const loadActivities = async () => {
