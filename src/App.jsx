@@ -1524,40 +1524,40 @@ export default function DailyChecksheetApp() {
 
             <div className="space-y-3">
               {(deleteCategory === 'ibadah'
-                ? [...ibadahActivities, ...customIbadah]
-                : [...kesehatanActivities, ...customKesehatan]
-              ).map((item, index) => (
-                <div
+                ? customIbadah
+                : customKesehatan
+              )
+                < div
                   key={index}
-                  className="bg-white rounded-2xl p-4 flex justify-between items-center"
+              className="bg-white rounded-2xl p-4 flex justify-between items-center"
                 >
-                  <span className="font-medium text-gray-800">
-                    {item}
-                  </span>
+              <span className="font-medium text-gray-800">
+                {item}
+              </span>
 
-                  <button
-                    onClick={() =>
-                      deleteActivity(deleteCategory, item)
-                    }
-                    className="text-red-500 text-xl"
-                  >
-                    🗑️
-                  </button>
-                </div>
+              <button
+                onClick={() =>
+                  deleteActivity(deleteCategory, item)
+                }
+                className="text-red-500 text-xl"
+              >
+                🗑️
+              </button>
+            </div>
               ))}
 
-              {((deleteCategory === 'ibadah'
-                ? [...ibadahActivities, ...customIbadah].length
-                : [...kesehatanActivities, ...customKesehatan].length) === 0) && (
-                  <div className="bg-white rounded-2xl p-5 text-center text-gray-400 text-sm">
-                    Belum ada aktivitas custom
-                  </div>
-                )}
-            </div>
+            {((deleteCategory === 'ibadah'
+              ? customIbadah.length
+              : customKesehatan.length) === 0) && (
+                <div className="bg-white rounded-2xl p-5 text-center text-gray-400 text-sm">
+                  Belum ada aktivitas custom
+                </div>
+              )}
           </div>
         </div>
       </div>
     </div>
+    </div >
   )
 }
       </div >
