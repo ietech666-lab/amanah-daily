@@ -437,20 +437,40 @@ export default function DailyChecksheetApp() {
     setNewActivity('');
   };
 
-  const deleteActivity = (category, item) => {
-    if (category === 'ibadah') {
-      setCustomIbadah(customIbadah.filter((x) => x !== item));
+  const deleteActivity = async (
+    category,
+    item
+  ) => {
 
-      setIbadahActivities(
-        ibadahActivities.filter((x) => x !== item)
+    const q = query(
+      collection(db, "activities"),
+      where("name", "==", item),
+      where("category", "==", category)
+    );
+
+    const snapshot = await getDocs(q);
+
+    snapshot.forEach(async (document) => {
+      await deleteDoc(
+        doc(
+          db,
+          "activities",
+          document.id
+        )
+      );
+    });
+
+    if (category === "ibadah") {
+      setCustomIbadah(
+        customIbadah.filter(
+          (x) => x !== item
+        )
       );
     } else {
       setCustomKesehatan(
-        customKesehatan.filter((x) => x !== item)
-      );
-
-      setKesehatanActivities(
-        kesehatanActivities.filter((x) => x !== item)
+        customKesehatan.filter(
+          (x) => x !== item
+        )
       );
     }
   };
