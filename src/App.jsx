@@ -278,10 +278,24 @@ export default function DailyChecksheetApp() {
       (analysis.length || 1)
     );
 
+    let advice = "";
+
+    if (average >= 80) {
+      advice =
+        "Pertahankan konsistensi. Fokus meningkatkan aktivitas yang masih di bawah rata-rata.";
+    } else if (average >= 50) {
+      advice =
+        `Fokus meningkatkan ${worst?.name || "aktivitas terlemah"} agar konsistensi bulanan meningkat.`;
+    } else {
+      advice =
+        `Mulailah dari target kecil. Prioritaskan ${worst?.name || "aktivitas terlemah"} selama 7 hari berturut-turut.`;
+    }
+
     return {
       average,
       best,
       worst,
+      advice,
     };
   };
 
@@ -1455,7 +1469,6 @@ export default function DailyChecksheetApp() {
                   <div className="overflow-auto max-h-[70vh]">
 
                     <table>
-                      ...
                     </table>
 
                   </div>
