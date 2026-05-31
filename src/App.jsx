@@ -1287,113 +1287,113 @@ export default function DailyChecksheetApp() {
 
                 </table>
               </div>   {/* tutup overflow-auto */}
+            </div>
 
-              {/* TEMPAT AI INSIGHT */}
+            {/* TEMPAT AI INSIGHT */}
 
-              <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+            <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
 
-                <h2 className="text-xl font-bold mb-4">
-                  🤖 AI Insight Bulan Ini
-                </h2>
+              <h2 className="text-xl font-bold mb-4">
+                🤖 AI Insight Bulan Ini
+              </h2>
 
-                <div className="space-y-3">
+              <div className="space-y-3">
 
-                  <div className="bg-blue-50 p-3 rounded-xl">
-                    <p className="font-bold text-blue-700">
-                      📈 Konsistensi Keseluruhan
-                    </p>
-                    <p>{Math.round(
-                      (
-                        (monthlyStats.ibadahDone +
-                          monthlyStats.kesehatanDone) /
-                        (monthlyTotalActivities || 1)
-                      ) * 100
-                    )}%</p>
-                  </div>
-
-                  <div className="bg-green-50 p-3 rounded-xl">
-                    <p className="font-bold text-green-700">
-                      🏆 Aktivitas Terbaik
-                    </p>
-                    <p>
-                      {aiResult.best}
-                    </p>
-                  </div>
-
-                  <div className="bg-red-50 p-3 rounded-xl">
-                    <p className="font-bold text-red-700">
-                      ⚠️ Aktivitas Terlemah
-                    </p>
-                    <p>
-                      {aiResult.weak}
-                    </p>
-                  </div>
-
-                  <div className="bg-indigo-50 p-3 rounded-xl">
-                    <p className="font-bold text-indigo-700">
-                      💡 Saran AI
-                    </p>
-
-                    <p>{aiResult.advice}</p>
-                  </div>
-
-                  <div className="bg-yellow-50 p-3 rounded-xl">
-                    <p className="font-bold text-yellow-700">
-                      🎯 Target Bulan Depan
-                    </p>
-                    <p>
-                      Tingkatkan konsistensi menjadi{" "}
-                      {aiResult.target}
-                    </p>
-                  </div>
-
+                <div className="bg-blue-50 p-3 rounded-xl">
+                  <p className="font-bold text-blue-700">
+                    📈 Konsistensi Keseluruhan
+                  </p>
+                  <p>{Math.round(
+                    (
+                      (monthlyStats.ibadahDone +
+                        monthlyStats.kesehatanDone) /
+                      (monthlyTotalActivities || 1)
+                    ) * 100
+                  )}%</p>
                 </div>
+
+                <div className="bg-green-50 p-3 rounded-xl">
+                  <p className="font-bold text-green-700">
+                    🏆 Aktivitas Terbaik
+                  </p>
+                  <p>
+                    {aiResult.best}
+                  </p>
+                </div>
+
+                <div className="bg-red-50 p-3 rounded-xl">
+                  <p className="font-bold text-red-700">
+                    ⚠️ Aktivitas Terlemah
+                  </p>
+                  <p>
+                    {aiResult.weak}
+                  </p>
+                </div>
+
+                <div className="bg-indigo-50 p-3 rounded-xl">
+                  <p className="font-bold text-indigo-700">
+                    💡 Saran AI
+                  </p>
+
+                  <p>{aiResult.advice}</p>
+                </div>
+
+                <div className="bg-yellow-50 p-3 rounded-xl">
+                  <p className="font-bold text-yellow-700">
+                    🎯 Target Bulan Depan
+                  </p>
+                  <p>
+                    Tingkatkan konsistensi menjadi{" "}
+                    {aiResult.target}
+                  </p>
+                </div>
+
               </div>
+            </div>
 
-              <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+            <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
 
-                <h2 className="text-xl font-bold mb-4">
-                  📈 Trend Konsistensi
-                </h2>
+              <h2 className="text-xl font-bold mb-4">
+                📈 Trend Konsistensi
+              </h2>
 
-                <div className="space-y-3">
-                  {monthlyTrend.map((item) => (
+              <div className="space-y-3">
+                {monthlyTrend.map((item) => (
 
-                    <div key={item.month}>
+                  <div key={item.month}>
 
-                      <div className="flex justify-between mb-1">
+                    <div className="flex justify-between mb-1">
 
-                        <span>
-                          {monthNames[item.month]}
-                        </span>
+                      <span>
+                        {monthNames[item.month]}
+                      </span>
 
-                        <span className="font-bold">
-                          {item.percentage}%
-                        </span>
-
-                      </div>
-
-                      <div className="w-full h-3 bg-gray-200 rounded-full">
-
-                        <div
-                          className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
-                          style={{
-                            width: `${item.percentage}%`
-                          }}
-                        />
-
-                      </div>
-
-                      <p className="text-xs text-gray-500 mt-2">
-                        🎯 {item.completed} dari {item.target}
-                        target aktivitas tercapai
-                      </p>
+                      <span className="font-bold">
+                        {item.percentage}%
+                      </span>
 
                     </div>
 
-                  ))}
+                    <div className="w-full h-3 bg-gray-200 rounded-full">
 
-                </div>
+                      <div
+                        className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
+                        style={{
+                          width: `${item.percentage}%`
+                        }}
+                      />
+
+                    </div>
+
+                    <p className="text-xs text-gray-500 mt-2">
+                      🎯 {item.completed} dari {item.target}
+                      target aktivitas tercapai
+                    </p>
+
+                  </div>
+
+                ))}
+
               </div>
             </div>
           </div>
