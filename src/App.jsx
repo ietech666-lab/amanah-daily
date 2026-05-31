@@ -303,6 +303,8 @@ export default function DailyChecksheetApp() {
       trends.push({
         month,
         percentage,
+        completed: monthData.length,
+        target: totalTarget,
       });
     }
 
@@ -1425,6 +1427,11 @@ export default function DailyChecksheetApp() {
                                     width: `${item.percentage}%`
                                   }}
                                 />
+
+                                <p className="text-xs text-gray-500 mt-2">
+                                  🎯 {item.completed} dari {item.target}
+                                  target aktivitas tercapai
+                                </p>
 
                               </div>
 
