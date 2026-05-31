@@ -287,6 +287,8 @@ export default function DailyChecksheetApp() {
 
   const aiInsight =
     getAIInsight();
+  console.log("AI INSIGHT", aiInsight);
+  console.log("FILTERED", filteredActivities);
 
   const monthlyTotalActivities =
     (ibadahTotal + kesehatanTotal) *
