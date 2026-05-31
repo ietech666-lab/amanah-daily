@@ -1034,46 +1034,6 @@ export default function DailyChecksheetApp() {
                   <h2 className="text-3xl font-black text-gray-800">
                     Statistik Bulanan
                   </h2>
-
-                  <div className="bg-white rounded-2xl p-4 shadow mt-4">
-                    <h2 className="font-bold text-lg mb-4">
-                      AI Evaluasi Bulan Ini 🤖
-                    </h2>
-
-                    <div className="space-y-3 text-sm">
-                      <div className="bg-green-50 p-3 rounded-xl">
-                        <p className="font-bold text-green-700">
-                          🏆 Aktivitas Terbaik
-                        </p>
-                        <p>{aiResult.best}</p>
-                      </div>
-
-                      <div className="bg-red-50 p-3 rounded-xl">
-                        <p className="font-bold text-red-700">
-                          ⚠️ Perlu Ditingkatkan
-                        </p>
-                        <p>{aiResult.weak}</p>
-                      </div>
-
-                      <div className="bg-blue-50 p-3 rounded-xl">
-                        <p className="font-bold text-blue-700">
-                          💡 Saran Perbaikan
-                        </p>
-                        <p>{aiResult.advice}</p>
-                      </div>
-
-                      <div className="bg-yellow-50 p-3 rounded-xl">
-                        <p className="font-bold text-yellow-700">
-                          🎯 Target Bulan Depan
-                        </p>
-                        <p>{aiResult.target}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Ringkasan habit bulan ini ({daysInMonth} hari)
-                  </p>
                 </div>
 
                 <div className="text-4xl">🗓️</div>
