@@ -304,6 +304,60 @@ export default function DailyChecksheetApp() {
   console.log("AI INSIGHT", aiInsight);
   console.log("FILTERED", filteredActivities);
 
+  const getMonthlyTrend = () => {
+
+    const currentMonth =
+      new Date().getMonth();
+
+    const trends = [];
+
+    for (
+      let month = 0;
+      month <= currentMonth;
+      month++
+    ) {
+
+      const monthActivities =
+        historyData.filter((item) => {
+
+          const itemDate =
+            new Date(item.date);
+
+          return (
+            itemDate.getMonth() === month &&
+            itemDate.getFullYear() ===
+            new Date().getFullYear()
+          );
+        });
+
+      const percentage = Math.round(
+        (
+          monthActivities.length /
+          (
+            (
+              allActivities.length *
+              new Date(
+                new Date().getFullYear(),
+                month + 1,
+                0
+              ).getDate()
+            ) || 1
+          )
+        ) * 100
+      );
+
+      trends.push({
+        month,
+        percentage,
+      });
+    }
+
+    return trends;
+  };
+
+  const monthlyTrend =
+    getMonthlyTrend();
+
   const monthlyTotalActivities =
     (ibadahTotal + kesehatanTotal) *
     daysInMonth;
@@ -1520,6 +1574,49 @@ export default function DailyChecksheetApp() {
                           Tingkatkan konsistensi menjadi{" "}
                           {Math.min(aiInsight.average + 10, 100)}%
                         </p>
+                      </div>
+
+                      <div className="bg-white rounded-[32px] p-6 shadow-xl mt-6">
+
+                        <h2 className="text-xl font-bold mb-4">
+                          📈 Trend Konsistensi
+                        </h2>
+
+                        <div className="space-y-3">
+
+                          {monthlyTrend.map((item) => (
+
+                            <div key={item.month}>
+
+                              <div className="flex justify-between mb-1">
+
+                                <span>
+                                  {monthNames[item.month]}
+                                </span>
+
+                                <span className="font-bold">
+                                  {item.percentage}%
+                                </span>
+
+                              </div>
+
+                              <div className="w-full h-3 bg-gray-200 rounded-full">
+
+                                <div
+                                  className="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-400"
+                                  style={{
+                                    width: `${item.percentage}%`
+                                  }}
+                                />
+
+                              </div>
+
+                            </div>
+
+                          ))}
+
+                        </div>
+
                       </div>
 
                     </div>
