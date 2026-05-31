@@ -757,7 +757,7 @@ export default function DailyChecksheetApp() {
 
             {currentActivities.map((item, index) => (
               <div
-                key={index}
+                key={item}
                 className={`rounded-[24px] p-5 flex items-center justify-between border transition-all hover:shadow-lg ${completedActivities.includes(item)
                   ? 'bg-gradient-to-r from-green-100 to-emerald-50 border-green-200'
                   : 'bg-gradient-to-r from-gray-50 to-white border-gray-100'
