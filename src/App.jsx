@@ -782,7 +782,7 @@ export default function DailyChecksheetApp() {
 
                   <div>
                     <p className="font-semibold text-gray-800">
-                      {item}
+                      {item || "⚠️ KOSONG"}
                     </p>
 
                     <p className="text-xs text-gray-400 mt-1">
