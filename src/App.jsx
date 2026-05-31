@@ -1541,7 +1541,13 @@ export default function DailyChecksheetApp() {
                         <p className="font-bold text-blue-700">
                           📈 Konsistensi Keseluruhan
                         </p>
-                        <p>{aiInsight.average}%</p>
+                        <p>{Math.round(
+                          (
+                            (monthlyStats.ibadahDone +
+                              monthlyStats.kesehatanDone) /
+                            (monthlyTotalActivities || 1)
+                          ) * 100
+                        )}%</p>
                       </div>
 
                       <div className="bg-green-50 p-3 rounded-xl">
@@ -1549,7 +1555,7 @@ export default function DailyChecksheetApp() {
                           🏆 Aktivitas Terbaik
                         </p>
                         <p>
-                          {aiInsight.best?.name}
+                          {aiResult.best}
                           {" "}
                           ({aiInsight.best?.percentage}%)
                         </p>
@@ -1560,7 +1566,7 @@ export default function DailyChecksheetApp() {
                           ⚠️ Aktivitas Terlemah
                         </p>
                         <p>
-                          {aiInsight.worst?.name}
+                          {aiResult.weak}
                           {" "}
                           ({aiInsight.worst?.percentage}%)
                         </p>
@@ -1572,7 +1578,7 @@ export default function DailyChecksheetApp() {
                         </p>
                         <p>
                           Tingkatkan konsistensi menjadi{" "}
-                          {Math.min(aiInsight.average + 10, 100)}%
+                          {aiResult.target}
                         </p>
                       </div>
 
@@ -1583,7 +1589,6 @@ export default function DailyChecksheetApp() {
                         </h2>
 
                         <div className="space-y-3">
-
                           {monthlyTrend.map((item) => (
 
                             <div key={item.month}>
