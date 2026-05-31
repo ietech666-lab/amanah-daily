@@ -442,6 +442,8 @@ export default function DailyChecksheetApp() {
     item
   ) => {
 
+    console.log("TOMBOL HAPUS DIKLIK", category, item);
+
     const q = query(
       collection(db, "activities"),
       where("name", "==", item),
