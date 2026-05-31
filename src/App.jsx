@@ -1468,7 +1468,49 @@ export default function DailyChecksheetApp() {
                       🤖 AI Insight Bulan Ini
                     </h2>
 
-                    ...
+                    <div className="space-y-3">
+
+                      <div className="bg-blue-50 p-3 rounded-xl">
+                        <p className="font-bold text-blue-700">
+                          📈 Konsistensi Keseluruhan
+                        </p>
+                        <p>{aiInsight.average}%</p>
+                      </div>
+
+                      <div className="bg-green-50 p-3 rounded-xl">
+                        <p className="font-bold text-green-700">
+                          🏆 Aktivitas Terbaik
+                        </p>
+                        <p>
+                          {aiInsight.best?.name}
+                          {" "}
+                          ({aiInsight.best?.percentage}%)
+                        </p>
+                      </div>
+
+                      <div className="bg-red-50 p-3 rounded-xl">
+                        <p className="font-bold text-red-700">
+                          ⚠️ Aktivitas Terlemah
+                        </p>
+                        <p>
+                          {aiInsight.worst?.name}
+                          {" "}
+                          ({aiInsight.worst?.percentage}%)
+                        </p>
+                      </div>
+
+                      <div className="bg-yellow-50 p-3 rounded-xl">
+                        <p className="font-bold text-yellow-700">
+                          🎯 Target Bulan Depan
+                        </p>
+                        <p>
+                          Tingkatkan konsistensi menjadi{" "}
+                          {Math.min(aiInsight.average + 10, 100)}%
+                        </p>
+                      </div>
+
+                    </div>
+
                   </div>
 
                 </div>
